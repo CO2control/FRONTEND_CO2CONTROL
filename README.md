@@ -1,4 +1,4 @@
-![Logo CO₂ntrol](img/logo.png)
+![Logo CO₂ntrol](logo/logo.png)
 
 ## Sobre o projeto
 
