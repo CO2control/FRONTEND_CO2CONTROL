@@ -98,3 +98,110 @@
     width: 15%;
     margin-bottom: 20px;
 }
+
+
+/* style.login */
+
+body {
+  font-family: Arial;
+  height: 100vh;
+  display: flex;
+  margin: 0;
+}
+
+/* .container{
+  background-color: rgb(228,228,228);
+  width: 75%;
+  height: 600px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 30px;
+} */
+
+.esquerda {
+  width: 50%;
+  background: 
+    linear-gradient(rgba(65, 6, 6, 0.85)),
+    url("vinho.png");
+  background-size: cover;
+  background-position: center;
+  color:white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.texto1{
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.login {
+  position: relative;
+  width: 50%;
+  background-color: #ffffff;
+  flex-direction:column ;
+  display: flex;
+  padding: 120px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  color: #525252;
+}
+
+
+.login h2 {
+  width: 14%;
+  font-size: 28px;
+  background: linear-gradient(to right, #4e0606, #750d0d);
+  color: white;          
+  padding: 12px 30px; 
+  text-align: center;
+}
+
+.formulario .campo {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.formulario .campo span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.formulario input {
+  width: 90%;
+  padding: 8px 10px;
+  border: 1.5px solid #031114;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: left;
+}
+
+
+.botao {
+  width: 20%;
+  padding: 12px 0;
+  background: linear-gradient(to right, #4e0606, #750d0d);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  position: absolute;
+  top: 450px;  
+  left: 35%;  
+}
+
+.cadastre{
+  position: absolute;
+  top: 480px;  
+  left: 29%;  
+}
