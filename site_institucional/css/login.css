@@ -31,7 +31,7 @@ body {
     color: white;
 
     background-image: linear-gradient(rgba(60, 0, 0, 0.8), rgba(60, 0, 0, 0.8)),
-        url("logo.png");
+        url("../img/fundo-esquerdo.png");
 
     background-size: cover;
     background-position: center;
@@ -136,5 +136,9 @@ body {
 }
 
 .cadastre {
+    color: #878787;
+}
+
+a {
     color: #878787;
 }
