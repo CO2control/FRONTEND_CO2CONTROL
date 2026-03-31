@@ -1,6 +1,4 @@
 *{
-    margin: 0;
-    padding: 0;
     font-family: "Montserrat";
 }
 
@@ -99,3 +97,114 @@
     margin-bottom: 20px;
 }
 
+/* Css do simulador financeiro*/
+
+/* body {
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(250, 250, 250);
+    color: rgb(75, 75, 75);
+} */
+
+.simulador-financeiro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+    border-radius: 20px;
+    height: 800px;
+    width: 90%;
+    border: 3px solid rgb(137, 0, 0);
+    justify-self: center;
+}
+
+.head {
+    display: flex;
+    border-bottom: 2px solid rgb(137, 0, 0);
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-around;
+    align-items: center;
+    margin: -10px;
+}
+
+img {
+    width: 20%;
+}
+
+.txt_destaque {
+    background-image: linear-gradient(to right, rgb(100, 0, 0), rgb(213, 19, 19));
+    color: white;
+    border-radius: 5px;
+    padding: 2px 8px;
+}
+
+.sublinhado{
+    text-decoration: underline 3px rgb(180, 0, 0);
+    color: black;
+}
+
+.calculadora {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    min-width: fit-content;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0px 100px 0px 100px;
+    gap: 50px;
+}
+
+.apresentacao {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+    min-height: fit-content;
+    max-height: 500px;
+    background-color: rgba(220, 198, 73, 0.295);
+    border: dashed 3px rgba(182, 164, 60, 0.893);
+    align-self: center;
+    border-radius: 10px;
+    min-height: 250px;
+    align-items: center;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: 300px;
+    align-items: center;
+    gap: 20px;
+    max-width: 1100px;
+}
+
+input {
+    border: solid 3px rgb(183, 0, 0);
+    background-color: white;
+    height: 30px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+#btn-calc {
+    border: none;
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, rgb(137, 0, 0), rgb(230, 20, 20));
+    color: white;
+    font-weight: bold;
+}
+
+#btn-calc:hover {
+    background-image: linear-gradient(to right, rgb(230, 20, 20), rgb(137, 0, 0));
+}
+
+.entrada{
+    display: flex;
+    flex-direction: column;
+}

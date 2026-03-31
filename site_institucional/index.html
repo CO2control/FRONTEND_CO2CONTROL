@@ -44,11 +44,106 @@
         </div>
     </div>
 
+    <!-- Simulador financeiro -->
+    <div class="simulador-financeiro">
+        <div class="head">
+            <img src="img/logo black.png" alt="Logo CO2ntrol">
+            <h1><span class="sublinhado">Simulador</span> <span class="txt_destaque">Financeiro</span></h1>
+        </div>
+        <h3>Para calcular o possível prejuízo que o uso do CO₂ntrol evita, utilize a calculadora abaixo.</h3>
 
-    <div class="containerSimul"></div>
+        <div class="calculadora">
+            <div class="inputs">
 
+                <div class="entrada">
+                    <p>Quantidade de locais (foudres/tanques):</p>
+                    <input type="text" id="ipt_armazenamento">
+                </div>
+
+                <div class="entrada">
+                    <p>Capacidade média (litros):</p>
+                    <input type="text" id="ipt_capacidade">
+                </div>
+
+                <div class="entrada">
+                    <p>Valor médio do litro (R$):</p>
+                    <input type="text" id="ipt_valor_litro">
+                </div>
+
+                <!-- <div class="entrada">
+                    <p>Vinho perdido sem controle (litros):</p>
+                    <input type="text" id="ipt_litros_perdidos">
+                </div> -->
+
+                <div class="entrada">
+                    <p>Custo do cultivo/compra do ciclo (R$):</p>
+                    <input type="text" id="ipt_custo_cultivo">
+                </div>
+
+                <div class="entrada">
+                    <p>Tempo de cultivo até produção (meses):</p>
+                    <input type="text" id="ipt_tempo_gasto">
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button onclick="calcular()" id="btn-calc">Calcular</button>
+            </div>
+
+            <div class="apresentacao">
+                <p id="p_resultado"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Sobre nós -->
     <div class="containerAboutUs"></div>
 
     <div class="footer"></div>
 </body>
 </html>
+
+<script>
+    function calcular() {
+        let armazenamento = Number(ipt_armazenamento.value);
+        let capacidade = Number(ipt_capacidade.value);
+        let valorLitro = Number(ipt_valor_litro.value);
+        let custoCultivo = Number(ipt_custo_cultivo.value);
+        let tempoGasto = Number(ipt_tempo_gasto.value);
+
+        let taxaPerda = 0.05;
+
+        if (!armazenamento || !capacidade || !valorLitro || !custoCultivo) {
+            p_resultado.innerHTML = "Preencha todos os campos corretamente.";
+            return;
+        }
+
+        let capacidadeTotal = armazenamento * capacidade;
+        let litrosPerdidos = capacidadeTotal * taxaPerda;
+        let prejuizoVinho = litrosPerdidos * valorLitro;
+        let prejuizoCultivo = custoCultivo * taxaPerda;
+        let prejuizoTotal = prejuizoVinho + prejuizoCultivo;
+
+        let prejuizoPorArmazenamento = prejuizoTotal / armazenamento;
+
+        p_resultado.innerHTML = `
+    <h2>
+        O CO₂ntrol pode evitar cerca de <strong><span class="txt_destaque">
+        ${prejuizoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+        </span></strong> em perdas por ciclo.
+    </h2>
+
+    <h3>
+        Isso considera aproximadamente ${taxaPerda * 100}% de perda na produção.
+        <br><br>
+        
+        Por tanque: <strong><span class="txt_destaque">
+        ${prejuizoPorArmazenamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+        </span></strong>
+        <br><br>
+
+        Além disso, evita o desperdício de cerca de <strong>${tempoGasto} meses</strong> de cultivo.
+    </h3>`;
+    }
+</script>
