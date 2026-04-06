@@ -2,6 +2,10 @@
     font-family: "Montserrat";
 }
 
+body {
+    margin: 0;
+}
+
 /* MAIN CONTENT CSS */
 
 .containerContent{
@@ -207,4 +211,59 @@ input {
 .entrada{
     display: flex;
     flex-direction: column;
+}
+
+/* ABOUT US CSS: */
+.containerAboutUs {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1%;
+    background-color: #f8f4f6;
+    padding: 0.5%;
+    border: 3px solid #5c1415;
+    border-radius: 20px;
+}
+.titleTextAboutUs {
+    align-self: flex-start;
+    margin-left: 3.0%;
+}
+
+.AboutUsPrinciples {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 400px;
+    background-image: linear-gradient(to right, #420505, #740000);
+    color: white;
+    justify-items: center;
+    font-weight: bold;
+    flex-direction: column;
+    font-size: 32px;
+    border-radius: 20px;
+}
+
+.aboutUsTitle {
+    align-self: center;
+    font-size: 22px;
+}
+
+.aboutUsFade {
+    background-image: linear-gradient(to left, #420505, #740000);
+    color: white;
+    padding: 0.6%;
+}
+
+.AboutUsPrinciples hr {
+    width: 90%;
+    border: 1px solid white;
+    margin: 20px;
+}
+
+.footer {
+    height: 30px;
+    width: 100%;
+    background-color: #520606;
 }
