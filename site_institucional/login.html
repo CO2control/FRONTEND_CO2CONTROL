@@ -27,20 +27,68 @@
             <p>Faça o login para ter acesso ao sistema de monitoramento CO₂NTROL</p>
             <br><br>
             <div class="formulario">
-                <div class="campo">
-                    <span>CNPJ</span>
-                    <input id="email_input" type="text">
-                </div>
-                <div class="campo">
-                    <span>SENHA</span>
-                    <input id="senha_input" type="password">
-                </div>
+            <div class="campo">
+                <span>Email</span>
+                <input id="email_input" type="text">
+                <span id="email_erro" class="erro"></span>
+            </div>
+            <div class="campo">
+                <span>SENHA</span>
+                <input id="senha_input" type="password">
+                <span id="senha_erro" class="erro"></span>
+            </div>
 
-                <button class="botao">ENTRAR</button>
-                <h5 class="cadastre">Não possui uma conta? <a href="/site_institucional/cadastro.html">Cadastre-se</a></h5>
+            <button class="botao" onclick="entrar()">ENTRAR</button>
+            <div id="texto"></div>
+
+            <h5 class="cadastre">Não possui uma conta? <a href="/site_institucional/cadastro.html">Cadastre-se</a></h5>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    function entrar() {
+
+        let email = email_input.value;
+        let senha = senha_input.value;
+
+        let senhaTeste = 'julialima123';
+        let emailTeste = 'julia.lima@sptech.school';
+       
+        let emailErro = document.getElementById("email_erro");
+        let senhaErro = document.getElementById("senha_erro");
+       
+
+        emailErro.innerHTML = "";
+        senhaErro.innerHTML = "";
+
+        if (email == "" || senha == "") {
+            if (email == "") {
+                emailErro.innerHTML = "Preencha o email";
+            }
+            if (senha == "") {
+                senhaErro.innerHTML = "Preencha a senha";
+            }
+            return false;
+        }
+
+
+        if (email != emailTeste){
+            emailErro.innerHTML = "Email incorreto";
+            return false;
+        }
+
+        else if (senha != senhaTeste) {
+            senhaErro.innerHTML = "Senha incorreta";
+            return false;
+        }
+
+       
+            alert("BEM VINDO DE VOLTA!");
+            return true;
+       
+    }
+</script>

@@ -142,3 +142,8 @@ body {
 a {
     color: #878787;
 }
+
+.erro {
+    color: red !important;
+    font-size: 12px;
+}
