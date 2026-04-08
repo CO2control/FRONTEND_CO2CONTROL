@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ancelmo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Navbar do lado esquerdo -->
+        <div class="navbar">
+            <div class="sessoes">
+
+                <img src="assets/iconNav.png" alt="" id="icon">
+                <h2>Geral</h2>
+
+            </div>
+
+            <div class="sessoes">
+
+                <img src="assets/Settings.png" alt="" id="icon">
+                <h2>Geral</h2>
+
+            </div>
+
+            <div class="sessoes">
+
+                <img src="assets/Settings.png" alt="" id="icon">
+                <h2>Geral</h2>
+                <h2></h2>
+
+            </div>
+
+        </div>
+
+        <!-- Onde fica o Conteúdo da tela principal -->
+        <div class="main">
+
+            <div class="separacoes">
+
+                <div class="mensagens">
+
+                    <div class="kpi">ahsdf </div>
+                    <div class="kpi">asdfas</div>
+                    <div class="kpi">ahsdf</div>
+                    <div class="kpi">asdfas</div>
+
+
+                </div>
+
+                <div class="conteudo">
+
+                    <div class="grafico">
+                        <canvas id="myChart" style="height: 100%;"></canvas>
+                    </div>
+
+
+                    <div class="alertas">
+                        <h5>Alertas</h5> 
+                        <div class="atividade">
+
+                            <img src="" alt="">
+                            <p>CO2 Alto - TANQUE #001</p>
+                            
+                        </div>
+                        <div class="atividade">
+
+                            <img src="" alt="">
+                            <p>CO2 Alto - TANQUE #002</p>
+                            
+                        </div>
+                        <div class="atividade">
+
+                            <img src="" alt="">
+                            <p>CO2 Alto - TANQUE #003</p>
+                            
+                        </div>
+                                 
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+</body>
+
+</html>
+
+<script>
+
+
+
+
+    // Gráfico dashboard - home
+    const ctx = document.getElementById('myChart');
+
+
+    Chart.defaults.color = '#ffffff';
+
+    new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+    datasets: [
+      {
+        label: 'Nível de CO2',
+        data: [12, 19, 3, 5, 2, 3,5,8,9],
+        borderColor: 'red',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointRadius: 5,
+        tension: 0.4,
+        fill: false,
+        borderWidth: 3
+      },
+      {
+        label: 'Recomendável', 
+        data: [4, 4, 4, 4, 4, 4, 4, 4],
+        borderColor: 'green', 
+        borderWidth: 2,
+        borderDash: [5, 5], // Linha tracejada
+        pointRadius: 0,     
+        pointHitRadius: 0,  
+        fill: false
+      },
+      {
+        label: 'Recomendável', 
+        data: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+        borderColor: 'green', 
+        borderWidth: 2,
+        borderDash: [5, 5], // Linha tracejada
+        pointRadius: 0,     
+        pointHitRadius: 0,  
+        fill: false
+      }
+    ]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+</script>
