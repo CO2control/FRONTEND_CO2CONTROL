@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="chart.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="title">
+        <h1>Monitoramento geral</h1>
+        <h5>Visão geral dos níveis de CO2</h5>
+    </div>
+    <div class="chartContainer">
+        <canvas id="chartCO2"></canvas>
+    </div>
+</body>
+
+</html>
+<script>
+    new Chart(document.getElementById('chartCO2'), {
+        type: 'line',
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+        },
+        data: {
+            labels: ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+            datasets: [{
+                label: 'Nível de CO2 em porcentagem',
+                data: [25, 30, 35, 40, 60, 25],
+                fill: false,
+                tension: 0.4,
+                cubicInterpolationMode: 'monotone',
+                borderWidth: 2,
+                borderColor: 'rgb(244,244,244))',
+                backgroundColor: 'rgb(128, 12, 12)',
+                pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+            },
+            {
+                label: 'Limite ideal',
+                data: [40, 40, 40, 40, 40, 40],
+                borderWidth: 2,
+                borderColor: 'rgb(145, 0, 0)',
+                borderDash: [1, 10],
+                backgroundColor: 'rgb(145, 0, 0)',
+                pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+            }
+            ]
+        }
+    });
+
+    const backgroundPlugin = {
+        id: 'customBackground',
+        beforeDraw: (chart) => {
+            const { ctx, chartArea } = chart;
+            ctx.save();
+            ctx.fillStyle = 'rgba(200, 200, 255, 0.3)'; // cor desejada
+            ctx.fillRect(chartArea.left, chartArea.top, chartArea.width, chartArea.height);
+            ctx.restore();
+        }
+    };
+
+
+
+
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    //         datasets: [{
+    //             label: '# of Votes',
+    //             data: [12, 19, 3, 5, 2, 3],
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // });
+</script>
