@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="chart.css">
+    <link rel="stylesheet" href="css/chart.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,82 +16,167 @@
 </head>
 
 <body>
-    <div class="title">
-        <h1>Monitoramento geral</h1>
-        <h5>Visão geral dos níveis de CO2</h5>
+    <div>
+        <div class="header">
+                <div class="logo">
+                    <img src="img/logo copy.png" alt="Logo">
+                </div>
+
+                <div class="menu">
+                    <div class="navbar">INÍCIO</div>
+                    <div>SOLUÇÃO</div>
+                    <div>CALCULADORA</div>
+                    <div>SOBRE NÓS</div>
+                </div>
+
+                <div class="btn-client">ÁREA DO CLIENTE</div>
+            </div>
     </div>
-    <div class="chartContainer">
-        <canvas id="chartCO2"></canvas>
+    <div class="containerCharts">
+        <div class="containerSensor">
+            <div class="titleChart">
+                <h1>Monitoramento - Sensor 1</h1>
+                <span>Visão geral dos níveis de CO2</span>
+            </div>
+            <div class="chartContainer">
+                <canvas id="chartCO2_1"></canvas>
+            </div>
+        </div>
+        <div class="containerSensor">
+            <div class="titleChart">
+                <h1>Monitoramento - Sensor 2</h1>
+                <span>Visão geral dos níveis de CO2</span>
+            </div>
+            <div class="chartContainer">
+                <canvas id="chartCO2_2"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
     </div>
 </body>
 
 </html>
 <script>
-    new Chart(document.getElementById('chartCO2'), {
+    new Chart(document.getElementById('chartCO2_1'), {
         type: 'line',
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: 'rgb(244,244,244)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'rgb(244,244,244)'
+                    }
+                },
             },
+            layout: {
+                padding: 10
+            }
         },
         data: {
-            labels: ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
-            datasets: [{
-                label: 'Nível de CO2 em porcentagem',
-                data: [25, 30, 35, 40, 60, 25],
-                fill: false,
-                tension: 0.4,
-                cubicInterpolationMode: 'monotone',
-                borderWidth: 2,
-                borderColor: 'rgb(244,244,244))',
-                backgroundColor: 'rgb(128, 12, 12)',
-                pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+            labels: ['13:00', '13:10', '13:20', '13:30', '13:40', '13:50', '14:00', '14:10', '14:20', '14:30'],
+            datasets: [
+                {
+                    label: 'Nível de CO2 (%)',
+                    data: [20, 35, 30, 35, 34, 80, 35, 30, 25, 30, 35],
+                    fill: false,
+                    tension: 0.4,
+                    cubicInterpolationMode: 'monotone',
+                    borderWidth: 2,
+                    borderColor: 'rgb(244,244,244)',
+                    backgroundColor: 'rgb(144, 0, 0)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                },
+                {
+                    label: 'Máximo',
+                    data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 1,
+                    borderColor: '#f4f4f4',
+                    borderDash: [1, 10],
+                    backgroundColor: 'rgb(244, 244, 244, 0.5)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                },
+                {
+                    label: 'Mínimo',
+                    data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                    borderWidth: 2,
+                    fill: '-1',
+                    pointRadius: 1,
+                    borderColor: 'rgb(244, 244, 244)',
+                    borderDash: [1, 10],
+                    backgroundColor: 'rgb(244, 244, 244, 0.5)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                }
+            ]
+        }
+    });
+    new Chart(document.getElementById('chartCO2_2'), {
+        type: 'line',
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: 'rgb(244,244,244)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'rgb(244,244,244)'
+                    }
+                },
             },
-            {
-                label: 'Limite ideal',
-                data: [40, 40, 40, 40, 40, 40],
-                borderWidth: 2,
-                borderColor: 'rgb(145, 0, 0)',
-                borderDash: [1, 10],
-                backgroundColor: 'rgb(145, 0, 0)',
-                pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+            layout: {
+                padding: 10
             }
+        },
+        data: {
+            labels: ['13:00', '13:10', '13:20', '13:30', '13:40', '13:50', '14:00', '14:10', '14:20', '14:30'],
+            datasets: [
+                {
+                    label: 'Nível de CO2 (%)',
+                    data: [20, 35, 39, 60, 34, 80, 35, 30, 35, 50, 30],
+                    fill: false,
+                    tension: 0.4,
+                    cubicInterpolationMode: 'monotone',
+                    borderWidth: 2,
+                    borderColor: 'rgb(244,244,244)',
+                    backgroundColor: 'rgb(144, 0, 0)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                },
+                {
+                    label: 'Máximo',
+                    data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 1,
+                    borderColor: '#f4f4f4',
+                    borderDash: [1, 10],
+                    backgroundColor: 'rgb(244, 244, 244, 0.5)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                },
+                {
+                    label: 'Mínimo',
+                    data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                    borderWidth: 2,
+                    fill: '-1',
+                    pointRadius: 1,
+                    borderColor: 'rgb(244, 244, 244)',
+                    borderDash: [1, 10],
+                    backgroundColor: 'rgb(244, 244, 244, 0.5)',
+                    pointHoverBackgroundColor: 'rgb(244, 244, 244)'
+                }
             ]
         }
     });
 
-    const backgroundPlugin = {
-        id: 'customBackground',
-        beforeDraw: (chart) => {
-            const { ctx, chartArea } = chart;
-            ctx.save();
-            ctx.fillStyle = 'rgba(200, 200, 255, 0.3)'; // cor desejada
-            ctx.fillRect(chartArea.left, chartArea.top, chartArea.width, chartArea.height);
-            ctx.restore();
-        }
-    };
-
-
-
-
-    // new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //         datasets: [{
-    //             label: '# of Votes',
-    //             data: [12, 19, 3, 5, 2, 3],
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // });
 </script>

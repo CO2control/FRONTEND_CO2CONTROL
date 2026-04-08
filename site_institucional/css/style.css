@@ -266,7 +266,9 @@ input {
 .footer {
     height: 30px;
     width: 100%;
-    background-color: #520606;
+    background-color: #2d0c0c;
+    position: fixed;
+    bottom: 0
 }
 
 /* banner */
