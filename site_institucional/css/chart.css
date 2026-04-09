@@ -12,7 +12,7 @@
 }
 
 .chartContainer {
-    width: 45vw;
+    width: 40vw;
     height: 50vh;
 }
 
@@ -20,7 +20,6 @@
     display: flex;
     flex-direction: column;
     align-items: space-around;
-    margin-left: 20px;
 }
 
 .containerCharts {
@@ -50,16 +49,19 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     color: #f4f4f4;
 }
 
 .cardKpi{
-    width: 23vw;
+    width: 20vw;
     padding: 40px;
-    font-size: 20px;
+    font-size: 15px;
     height: 30vh;
-    margin: 20px 1vw;
+    margin-top: 20px;
     background-color: #2d0c0c;
     border-radius: 30px;
 }
+ .cardKpi > h4{
+    font-size: 70px;
+ }
