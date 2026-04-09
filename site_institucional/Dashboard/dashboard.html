@@ -1,165 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Ancelmo</title>
+    <title>Dashboard CO2</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dashboard.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
     <div class="container">
 
-        <!-- Navbar do lado esquerdo -->
-        <div class="navbar">
-            <div class="sessoes">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
 
-                <img src="assets/iconNav.png" alt="" id="icon">
-                <h2>Geral</h2>
-
+            <div class="logo">
+                <img src="./assets/logo.png" alt="">
             </div>
 
-            <div class="sessoes">
-
-                <img src="assets/Settings.png" alt="" id="icon">
-                <h2>Geral</h2>
-
-            </div>
-
-            <div class="sessoes">
-
-                <img src="assets/Settings.png" alt="" id="icon">
-                <h2>Geral</h2>
-                <h2></h2>
-
+            <div class="menu">
+                <div class="item">Dashboard</div>
+                <div class="item">Tanques</div>
+                <div class="item">Alertas</div>
+                <div class="item">Relatórios</div>
+                <div class="item">Histórico</div>
+                <div class="item">Configurações</div>
             </div>
 
         </div>
 
-        <!-- Onde fica o Conteúdo da tela principal -->
+        <!-- MAIN -->
         <div class="main">
 
-            <div class="separacoes">
+            <!-- KPIs -->
+            <div class="kpis">
 
-                <div class="mensagens">
+                <div class="kpi">
+                    <div class="kpi-title">Tanques</div>
+                    <div class="kpi-value">12</div>
+                </div>
 
-                    <div class="kpi">ahsdf </div>
-                    <div class="kpi">asdfas</div>
-                    <div class="kpi">ahsdf</div>
-                    <div class="kpi">asdfas</div>
+                <div class="kpi">
+                    <div class="kpi-title">Em Alerta</div>
+                    <div class="kpi-value">3</div>
+                </div>
 
+                <div class="kpi">
+                    <div class="kpi-title">Nível Médio</div>
+                    <div class="kpi-value">8.2%</div>
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-title">Alertas Hoje</div>
+                    <div class="kpi-value">5</div>
+                </div>
+
+            </div>
+
+            <!-- CONTEÚDO -->
+            <div class="content">
+
+                <!-- GRÁFICOS -->
+                <div class="charts">
+
+                    <div class="chart">
+                        <div class="titulo">Nível de CO2</div>
+                        <canvas id="chart1"></canvas>
+                    </div>
+
+                    <div class="chart">
+                        <div class="titulo">Variação</div>
+                        <canvas id="chart2"></canvas>
+                    </div>
 
                 </div>
 
-                <div class="conteudo">
+                <!-- ALERTAS -->
+                <div class="alerts">
 
-                    <div class="grafico">
-                        <canvas id="myChart" style="height: 100%;"></canvas>
-                    </div>
+                    <div class="titulo">Alertas</div>
 
-
-                    <div class="alertas">
-                        <h5>Alertas</h5> 
-                        <div class="atividade">
-
-                            <img src="" alt="">
-                            <p>CO2 Alto - TANQUE #001</p>
-                            
-                        </div>
-                        <div class="atividade">
-
-                            <img src="" alt="">
-                            <p>CO2 Alto - TANQUE #002</p>
-                            
-                        </div>
-                        <div class="atividade">
-
-                            <img src="" alt="">
-                            <p>CO2 Alto - TANQUE #003</p>
-                            
-                        </div>
-                                 
-                    </div>
-
+                    <div class="alert">CO2 Alto - Tanque #001</div>
+                    <div class="alert">CO2 Alto - Tanque #002</div>
+                    <div class="alert">CO2 Alto - Tanque #003</div>
 
                 </div>
 
             </div>
 
-
         </div>
+
+    </div>
+
+    <script>
+        Chart.defaults.color = '#ffffff';
+
+        // GRÁFICO 1
+        new Chart(document.getElementById('chart1'), {
+            type: 'line',
+            data: {
+                labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+                datasets: [{
+                    label: 'CO2',
+                    data: [12, 19, 3, 5, 2, 3, 5, 8],
+                    borderColor: 'red',
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'red',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // GRÁFICO 2
+        new Chart(document.getElementById('chart2'), {
+            type: 'bar',
+            data: {
+                labels: ['T1', 'T2', 'T3', 'T4', 'T5'],
+                datasets: [{
+                    label: 'CO2 por Tanque',
+                    data: [5, 8, 6, 10, 7],
+                    backgroundColor: 'red'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
 
 </body>
 
 </html>
-
-<script>
-
-
-
-
-    // Gráfico dashboard - home
-    const ctx = document.getElementById('myChart');
-
-
-    Chart.defaults.color = '#ffffff';
-
-    new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
-    datasets: [
-      {
-        label: 'Nível de CO2',
-        data: [12, 19, 3, 5, 2, 3,5,8,9],
-        borderColor: 'red',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointRadius: 5,
-        tension: 0.4,
-        fill: false,
-        borderWidth: 3
-      },
-      {
-        label: 'Recomendável', 
-        data: [4, 4, 4, 4, 4, 4, 4, 4],
-        borderColor: 'green', 
-        borderWidth: 2,
-        borderDash: [5, 5], // Linha tracejada
-        pointRadius: 0,     
-        pointHitRadius: 0,  
-        fill: false
-      },
-      {
-        label: 'Recomendável', 
-        data: [2, 2, 2, 2, 2, 2, 2, 2, 2],
-        borderColor: 'green', 
-        borderWidth: 2,
-        borderDash: [5, 5], // Linha tracejada
-        pointRadius: 0,     
-        pointHitRadius: 0,  
-        fill: false
-      }
-    ]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-
-</script>
