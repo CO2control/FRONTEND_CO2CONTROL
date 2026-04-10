@@ -1,5 +1,5 @@
 * {
-    font-family: "Montserrat";
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -271,13 +271,6 @@ input {
 
 /* banner */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
 .containerBanner{
     background:
         linear-gradient(to right, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0.4) 70%),
@@ -395,4 +388,19 @@ input {
 
 .btn:hover {
     background: #a00000;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 80px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.containerBanner {
+    width: 100%;
+    max-width: 100%;
 }
