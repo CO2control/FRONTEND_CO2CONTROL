@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="layout">
+        <div class="navbar">
+            <img src="assets/logo black.png" class="logoBanner">
+            <p>Bem vindo de volta! usuário.</p>
+        </div>
+        <div class="container">
+            <div class="banner">
+                <p> -Nome da empresa- </p>
+            </div>
+            <div class="dashboard">
+                <div class="divKPI">
+                    <p>Sua vinícola passou <span>--</span> minutos fora dos parametros ideais.</p>
+                </div>
+                <div class="divKPI">
+                    <p>Status foudres: <span class="ideal">1</span> | <span class="problema">2</span> | <span
+                            class="ideal">3</span> | <span class="ideal">4</span> | <span class="ideal">5</span> | <span
+                            class="problema">6</span> | <span class="problema">7</span> | <span class="ideal">8</span>
+                    </p>
+                </div>
+                <div class="divGrafico">
+                    <canvas id="grafico1" class="grafico2"></canvas>
+                </div>
+                <div class="divGrafico">
+                    <canvas id="grafico2" class="grafico2"></canvas>
+                </div>
+                <div class="divGrafico">
+                    <canvas id="grafico1" class="grafico2"></canvas>
+                </div>
+                <div class="divGrafico">
+                    <canvas id="grafico2" class="grafico2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/charts.js"></script>
