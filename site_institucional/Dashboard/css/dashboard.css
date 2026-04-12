@@ -129,13 +129,15 @@ body {
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 20px;
+
 }
 
 .chart {
     position: relative;
-    height: 200px;
-    padding: 20px;
+    height: 400px;
+    padding: 25px;
     border-radius: 12px;
     color: white;
     
@@ -175,4 +177,12 @@ body {
 .titulo {
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+}
+
+span{
+    color: white;
 }

@@ -7,7 +7,7 @@
     <title>Dashboard CO2</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -24,16 +24,20 @@
             </div>
 
             <div class="menu">
-                <div class="item"><img src="./assets/iconNav.png" alt="">Dashboard</div>
-                <div class="item"><img src="./assets/tanque.png" alt="">Tanques</div>
-                <div class="item"><img src="./assets/alerta.png" alt="">Alertas</div>
-                <div class="item"><img src="./assets/relatorio.png" alt="">Relatórios</div>
-                <div class="item"><img src="./assets/historia.png" alt="">Histórico</div>
-                <div class="item"><img src="./assets/Settings.png" alt="">Configurações</div>
-                <div class="item"><img src="./assets/porta.png" alt="">Sair</div>
+                <a href="dashboard.html">
+                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Dashboard</span></div>
+                </a>
+                <a href="tanques.html">
+                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
+                </a>
+                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
+                <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
+                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
+                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div>
+                <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
             </div>
 
-            
+
 
         </div>
 
@@ -76,11 +80,6 @@
                 <div class="charts">
 
                     <div class="chart">
-                        <div class="titulo">Nível de CO2</div>
-                        <canvas id="chart1"></canvas>
-                    </div>
-
-                    <div class="chart">
                         <div class="titulo">Variação</div>
                         <canvas id="chart2"></canvas>
                     </div>
@@ -92,9 +91,9 @@
 
                     <div class="titulo">Alertas</div>
 
-                    <div class="alert">CO2 Alto - Tanque #001</div>
-                    <div class="alert">CO2 Alto - Tanque #002</div>
-                    <div class="alert">CO2 Alto - Tanque #003</div>
+                    <div class="alert"><span>CO2 Alto - Tanque #001</span></div>
+                    <div class="alert"><span>CO2 Alto - Tanque #002</span></div>
+                    <div class="alert"><span>CO2 Alto - Tanque #001</span></div>
 
                 </div>
 
@@ -107,67 +106,73 @@
     <script>
         Chart.defaults.color = '#ffffff';
 
-        // GRÁFICO 1
-        new Chart(document.getElementById('chart1'), {
-            type: 'line',
-            data: {
-                labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
-                datasets: [{
-                    label: 'CO2',
-                    data: [0, 2, 3, 12, 19, 3, 5, 2, 3, 5, 8],
-                    borderColor: 'red',
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: 'red',
-                    pointBorderWidth: 1,
-                    fill:true
-                },{
-                    label: 'Minimo Ideal',
-                    data: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                    borderColor: 'green',
-                    tension: 0.4,   
-                    pointBorderColor: 'green',
-                    borderDash: [5,5],
-                    pointBorderWidth: 2,
-                    fill:true
-                },{
-                    label: 'Maximo Ideal',
-                    data: [4,4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-                    borderColor: 'green',
-                    tension: 0.4,
-                    pointBorderColor: 'green',
-                    borderDash: [5,5],
-                    pointBorderWidth: 2,
-                    fill:true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
-        // GRÁFICO 2
         new Chart(document.getElementById('chart2'), {
             type: 'bar',
             data: {
-                labels: ['T1', 'T2', 'T3', 'T4', 'T5'],
-                datasets: [{
-                    label: 'CO2 por Tanque',
-                    data: [5, 8, 6, 10, 7],
-                    backgroundColor: 'rgb(114, 47, 55)', 
-                    borderColor: 'white',
-                    borderWidth: 2,                           
-                    borderRadius: 5
+                labels: ['', 'T1', 'T2', 'T3', 'T4', 'T5', ''],
+                datasets: [
+                    {
+                        label: 'CO2 por Tanque',
+                        data: [null, 5, 8, 6, 10, 7, null],
+                        backgroundColor: 'rgb(114, 47, 55)',
+                        borderColor: 'white',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        order: 2,
+                        barPercentage: 0.5,
+                        categoryPercentage: 0.5
+                    },
+                    {
+                        label: 'Mínimo Ideal',
+                        data: [2, 2, 2, 2, 2, 2, 2],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        type: 'line',
+                        pointRadius: 0,
+                        fill: false,
+                        order: 1
+                    },
+                    {
+                        label: 'Faixa Ideal',
+                        data: [4, 4, 4, 4, 4, 4, 4],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        type: 'line',
+                        pointRadius: 0,
+                        fill: '-1',
+                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                        order: 1
+                    }
 
-                }]
+                ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        offset: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            // Isso evita que apareça o vazio na legenda do eixo X que ta la no label
+                            callback: function (val, index) {
+                                return this.getLabelForValue(val);
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255,255,255,0.1)'
+                        }
+                    }
+                }
             }
         });
+
+
     </script>
 
 </body>
