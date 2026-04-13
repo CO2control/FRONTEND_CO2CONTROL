@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanques - CO2</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tanques.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+                <img src="./assets/logo.png" alt="">
+            </div>
+
+            <div class="menu">
+                <a href="dashboard.html">
+                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Dashboard</span></div>
+                </a>
+                <a href="tanques.html">
+                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
+                </a>
+                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
+                <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
+                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
+                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div>
+                <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+            </div>
+
+
+
+        </div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- KPIs -->
+            <div class="kpis">
+
+                <div class="kpi">
+                    <div class="kpi-title"><span>Tanque</span></div>
+                    <div class="kpi-value"><span>1</span></div>
+                    <img src="./assets/wi-fi.png" alt="">
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-title"><span>Máximo Atingido</span></div>
+                    <div class="kpi-value"><span>19%</span></div>
+                    <div class="kpi-ruim"></div>
+                    <div class="kpi_media"></div>
+                    <img src="./assets/high.png" alt="">
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-title"><span>Nível Médio do tanque</span></div>
+                    <div class="kpi-value"><span>5%</span></div>
+                    <div class="sinal"><span>Bom</span></div>
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-title"><span>Alertas emitidos hoje</span></div>
+                    <div class="kpi-value">0</div>
+                    <img src="./assets/alarme.png" alt="">
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTEÚDO -->
+            <div class="content">
+
+                <div class="pesquisa">
+                    <input type="text" id="inputBusca" placeholder="Pesquisar tanque (ex: Tanque 2)...">
+                    <button onclick="buscarTanque()">Buscar</button>
+                </div>
+
+                <!-- GRÁFICOS -->
+                <div class="charts">
+
+                    <div class="chart-um">
+                        <div class="titulo"><span>Nível de CO2</span></div>
+                        <canvas id="chart1"></canvas>
+                    </div>
+
+                    <div class="chart-dois">
+                        <div class="titulo"><span>Nível Atual</span></div>
+                        <canvas id="chartGauge"></canvas>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#ffffff';
+
+        // GRÁFICO 1
+        new Chart(document.getElementById('chart1'), {
+            type: 'line',
+            data: {
+                labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+                datasets: [{
+                    label: 'CO2',
+                    data: [0, 2, 3, 12, 19, 3, 5, 2, 3, 5, 8],
+                    borderColor: 'red',
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'red',
+                    pointBorderWidth: 1,
+                    fill: true
+                }, {
+                    label: 'Minimo Ideal',
+                    data: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    borderColor: 'green',
+                    tension: 0.4,
+                    pointBorderColor: 'green',
+                    borderDash: [5, 5],
+                    pointBorderWidth: 2,
+                    fill: true
+                }, {
+                    label: 'Maximo Ideal',
+                    data: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+                    borderColor: 'green',
+                    tension: 0.4,
+                    pointBorderColor: 'green',
+                    borderDash: [5, 5],
+                    pointBorderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // GRÁFICO 2
+        new Chart(document.getElementById('chartGauge'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Ocupado', 'Livre'],
+                datasets: [{
+                    data: [8.2, 91.8],
+                    backgroundColor: ['#ff4d4d', 'rgba(255,255,255,0.1)'],
+                    borderWidth: 0,
+                    circumference: 180,
+                    rotation: 270
+                }]
+            },
+            options: {
+                aspectRatio: 1.5,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>
