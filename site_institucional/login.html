@@ -33,7 +33,7 @@
                 <span id="email_erro" class="erro"></span>
             </div>
             <div class="campo">
-                <span>SENHA</span>
+                <span>Senha</span>
                 <input id="senha_input" type="password">
                 <span id="senha_erro" class="erro"></span>
             </div>
@@ -86,9 +86,14 @@
             return false;
         }
 
+        let loginFeito = senha == senhaTeste && email == emailTeste
+
+        if(loginFeito){
+            alert("Login realizado com sucesso!");
+            window.location = './Dashboard/dashboard.html'
+        }
        
-            alert("BEM VINDO DE VOLTA!");
-            return true;
+            
        
     }
 </script>
