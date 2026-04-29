@@ -57,7 +57,7 @@
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Tanques em Alertas</span></div>
-                    <div class="kpi-value"><span>2</span></div>
+                    <div class="kpi-value"><span>3</span></div>
                     <img src="./assets/alertaColor.png" alt="">
                 </div>
 
@@ -69,7 +69,7 @@
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Alertas Hoje</span></div>
-                    <div class="kpi-value"><span>2</span></div>
+                    <div class="kpi-value"><span>3</span></div>
                     <img src="./assets/alarme.png" alt="">
                 </div>
 
@@ -94,11 +94,11 @@
                     <div class="titulo">Alertas</div>
 
                     <div class="alert">
-                        <span>CO2 Alto - Tanque #001 <span>13/04/2026 - 13:57</span>
+                        <span>CO2 Alto - Tanque #003 <span>13/04/2026 - 13:57</span>
                         </span>
                     </div>
-                    <div class="alert"><span>CO2 Alto - Tanque #002 <span>13/04/2026 - 14:51</span></span></div>
-                    <div class="alert"><span>CO2 Alto - Tanque #003 <span>06/04/2026 - 11:55</span></span></div>
+                    <div class="alert"><span>CO2 Alto - Tanque #004 <span>13/04/2026 - 14:51</span></span></div>
+                    <div class="alert"><span>CO2 Alto - Tanque #005 <span>06/04/2026 - 11:55</span></span></div>
 
                 </div>
 
@@ -118,7 +118,7 @@
                 datasets: [
                     {
                         label: 'CO2 por Tanque',
-                        data: [null, 5, 8, 6, 10, 7, null],
+                        data: [null, 30, 40, 15, 60, 50, null],
                         backgroundColor: 'rgb(114, 47, 55)',
                         borderColor: 'white',
                         borderWidth: 2,
@@ -129,7 +129,7 @@
                     },
                     {
                         label: 'Mínimo Ideal',
-                        data: [2, 2, 2, 2, 2, 2, 2],
+                        data: [20, 20, 20, 20, 20, 20, 20],
                         borderColor: 'green',
                         borderWidth: 2,
                         type: 'line',
@@ -139,7 +139,7 @@
                     },
                     {
                         label: 'Faixa Ideal',
-                        data: [4, 4, 4, 4, 4, 4, 4],
+                        data: [40, 40, 40, 40, 40, 40, 40],
                         borderColor: 'green',
                         borderWidth: 2,
                         type: 'line',
@@ -169,6 +169,7 @@
                     },
                     y: {
                         beginAtZero: true,
+                        max: 100,
                         grid: {
                             color: 'rgba(255,255,255,0.1)'
                         }

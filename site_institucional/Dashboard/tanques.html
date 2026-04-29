@@ -57,7 +57,7 @@
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Máximo Atingido</span></div>
-                    <div class="kpi-value"><span>19%</span></div>
+                    <div class="kpi-value"><span>70%</span></div>
                     <div class="kpi-ruim"></div>
                     <div class="kpi_media"></div>
                     <img src="./assets/high.png" alt="">
@@ -65,13 +65,13 @@
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Nível Médio do tanque</span></div>
-                    <div class="kpi-value"><span>5%</span></div>
+                    <div class="kpi-value"><span>30%</span></div>
                     <div class="sinal"><span>Bom</span></div>
                 </div>
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Alertas emitidos hoje</span></div>
-                    <div class="kpi-value">0</div>
+                    <div class="kpi-value">3</div>
                     <img src="./assets/alarme.png" alt="">
                 </div>
 
@@ -118,37 +118,51 @@
                 labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
                 datasets: [{
                     label: 'CO2',
-                    data: [0, 2, 3, 12, 19, 3, 5, 2, 3, 5, 8],
+                    data: [0, 25, 30, 45, 50, 70, 40, 30, 50, 40, 30],
                     borderColor: 'red',
                     tension: 0.4,
                     pointRadius: 4,
                     pointBackgroundColor: '#fff',
                     pointBorderColor: 'red',
                     pointBorderWidth: 1,
-                    fill: true
+                    fill: false
                 }, {
                     label: 'Minimo Ideal',
-                    data: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
                     borderColor: 'green',
                     tension: 0.4,
                     pointBorderColor: 'green',
                     borderDash: [5, 5],
                     pointBorderWidth: 2,
-                    fill: true
+                    fill: -1
                 }, {
                     label: 'Maximo Ideal',
-                    data: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+                    data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
                     borderColor: 'green',
                     tension: 0.4,
                     pointBorderColor: 'green',
                     borderDash: [5, 5],
                     pointBorderWidth: 2,
-                    fill: true
+                    fill: false
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: 'rgb(244,244,244)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'rgb(244,244,244)'
+                        }
+                    },
+                }
             }
         });
 
@@ -156,9 +170,9 @@
         new Chart(document.getElementById('chartGauge'), {
             type: 'doughnut',
             data: {
-                labels: ['Ocupado', 'Livre'],
+                labels: ['Nível atual de CO2', 'Máximo'],
                 datasets: [{
-                    data: [8.2, 91.8],
+                    data: [30, 100],
                     backgroundColor: ['#ff4d4d', 'rgba(255,255,255,0.1)'],
                     borderWidth: 0,
                     circumference: 180,
