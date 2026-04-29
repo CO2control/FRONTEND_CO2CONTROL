@@ -98,6 +98,7 @@
                     <div class="chart-dois">
                         <div class="titulo"><span>Nível Atual</span></div>
                         <canvas id="chartGauge"></canvas>
+                        <div class="kpi-value"><span>Status: Regular</span></div>
                     </div>
 
 
@@ -171,13 +172,32 @@
             type: 'doughnut',
             data: {
                 labels: ['Nível atual de CO2', 'Máximo'],
-                datasets: [{
-                    data: [30, 100],
-                    backgroundColor: ['#ff4d4d', 'rgba(255,255,255,0.1)'],
+                datasets: [ {
+                    label: 'Faixa Ideal',
+                    data: [1],
+                    backgroundColor: ['transparent', 'transparent'],
+                    weight: 0.01,
+                    borderColor: 'green',
+                    borderWidth: 3,
+                    circumference: 36,
+                    rotation: 306
+                }, {
+                    data: [30, 70], // PRIMEIRO PARAMETRO: NIVEL EM (%), SEGUNDO: 100 - NÍVEL (AMBOS EM PORCENTAGEM)
+                    backgroundColor: ['lightgray', 'rgba(255,255,255,0.1)'],
                     borderWidth: 0,
                     circumference: 180,
                     rotation: 270
-                }]
+                }, {
+                    label: 'Faixa Ideal',
+                    data: [1],
+                    backgroundColor: ['transparent', 'transparent'],
+                    weight: 0.01,
+                    borderColor: 'green',
+                    borderWidth: 3,
+                    circumference: 36,
+                    rotation: 306
+                    }            
+                ]
             },
             options: {
                 aspectRatio: 1.5,
