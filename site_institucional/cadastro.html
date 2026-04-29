@@ -32,8 +32,6 @@
             </div>
 
             <div class="campos">
-                <span>Insira o seu CNPJ:</span>
-                <input type="text" id="ipt_cnpj">
 
                 <span>Insira o seu Telefone (Ex: 11912345678):</span>
                 <input type="number" id="ipt_telefone">
@@ -66,13 +64,11 @@
 
 <script>
     function validarCadastro() {
-        let cnpj = ipt_cnpj.value;
         let telefone = ipt_telefone.value;
         let email = ipt_email.value;
         let senha = ipt_senha.value;
         let senhaNovamente = ipt_novamenteSenha.value;
 
-        //CNPJ não pode estar vazio
         //telefone não pode estar vazio
         //email não pode estar vazio
         //senha não pode estar vazio
@@ -82,7 +78,7 @@
         //Usar regex para validação da senha
         //Usar laço de repetição
 
-        if (cnpj == "" || telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
+        if (telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
             alert("Erro: Preencha todos os campos para prosseguir.");
         } else {
 
