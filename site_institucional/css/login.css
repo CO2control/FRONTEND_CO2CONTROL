@@ -12,6 +12,28 @@ body {
     background-color: rgb(228, 228, 228);
 }
 
+.btn-client {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    background: #d60000;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-client a{
+    color: white;
+    text-decoration: none;
+}
+
+.btn-client:hover {
+    background: #a00000;
+}
+
 .container {
     background-color: rgb(255, 255, 255);
     width: 75%;
@@ -112,7 +134,7 @@ body {
     border: solid 3px #C6C1C1;
 }
 
-.campo{
+.campo {
     display: flex;
     flex-direction: column;
 }

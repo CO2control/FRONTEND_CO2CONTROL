@@ -18,10 +18,12 @@
 
 <body>
 
+    <div class="btn-client"><a href="index.html">Pagina Inicial</a></div>
+
     <div class="container">
         <div class="container-esquerda">
             <img src="img/logo.png" alt="" class="logo">
-            <h1>Seja <br> Bem-vindo!</h1>
+            <h1>SEJA <br> BEM-VINDO!</h1>
         </div>
         <div class="container-direita">
             <div class="titulo">
@@ -32,6 +34,9 @@
             </div>
 
             <div class="campos">
+
+                <span>Insira o seu nome:</span>
+                <input type="texte" id="ipt_nome">
 
                 <span>Insira o seu Telefone (Ex: 11912345678):</span>
                 <input type="number" id="ipt_telefone">
@@ -64,6 +69,7 @@
 
 <script>
     function validarCadastro() {
+        let nome = ipt_nome.value;
         let telefone = ipt_telefone.value;
         let email = ipt_email.value;
         let senha = ipt_senha.value;
@@ -78,7 +84,7 @@
         //Usar regex para validação da senha
         //Usar laço de repetição
 
-        if (telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
+        if (nome == "" || telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
             alert("Erro: Preencha todos os campos para prosseguir.");
         } else {
 
@@ -153,7 +159,7 @@
 
                 }
 
-            }else{
+            } else {
                 alert("Insira um número válido com 11 dígitos (DDD + Número)!");
             }
 
