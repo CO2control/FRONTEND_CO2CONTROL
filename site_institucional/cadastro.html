@@ -35,6 +35,9 @@
 
             <div class="campos">
 
+                <span>Insira o codigo de Ativação:</span>
+                <input type="texte" id="ipt_codigo">
+
                 <span>Insira o seu nome:</span>
                 <input type="texte" id="ipt_nome">
 
@@ -84,7 +87,7 @@
         //Usar regex para validação da senha
         //Usar laço de repetição
 
-        if (nome == "" || telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
+        if (ipt_codigo == "" || nome == "" || telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
             alert("Erro: Preencha todos os campos para prosseguir.");
         } else {
 
