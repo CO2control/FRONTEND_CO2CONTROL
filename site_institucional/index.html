@@ -98,35 +98,24 @@
 
         <div class="calculadora">
             <div class="inputs">
-
                 <div class="entrada">
                     <p>Quantidade de locais (foudres/tanques):</p>
                     <input type="text" id="ipt_armazenamento">
                 </div>
 
                 <div class="entrada">
-                    <p>Capacidade média (litros):</p>
+                    <p>Capacidade média (litros) por tanque:</p>
                     <input type="text" id="ipt_capacidade">
                 </div>
 
                 <div class="entrada">
-                    <p>Valor médio do litro (R$):</p>
+                    <p>Valor médio do litro do vinho vendido (R$):</p>
                     <input type="text" id="ipt_valor_litro">
                 </div>
 
-                <!-- <div class="entrada">
-                    <p>Vinho perdido sem controle (litros):</p>
+                <div class="entrada">
+                    <p>Vinho perdido (litros) sem controle por tanque:</p>
                     <input type="text" id="ipt_litros_perdidos">
-                </div> -->
-
-                <div class="entrada">
-                    <p>Custo do cultivo/compra do ciclo (R$):</p>
-                    <input type="text" id="ipt_custo_cultivo">
-                </div>
-
-                <div class="entrada">
-                    <p>Tempo de cultivo até produção (meses):</p>
-                    <input type="text" id="ipt_tempo_gasto">
                 </div>
             </div>
 
@@ -213,41 +202,36 @@
         let armazenamento = Number(ipt_armazenamento.value);
         let capacidade = Number(ipt_capacidade.value);
         let valorLitro = Number(ipt_valor_litro.value);
-        let custoCultivo = Number(ipt_custo_cultivo.value);
-        let tempoGasto = Number(ipt_tempo_gasto.value);
+        let litrosPerdidos = Number(ipt_litros_perdidos.value);
 
-        let taxaPerda = 0.05;
-
-        if (!armazenamento || !capacidade || !valorLitro || !custoCultivo) {
+        if (!armazenamento || !capacidade || !valorLitro || !litrosPerdidos) {
             p_resultado.innerHTML = "Preencha todos os campos corretamente.";
             return;
         }
 
         let capacidadeTotal = armazenamento * capacidade;
-        let litrosPerdidos = capacidadeTotal * taxaPerda;
-        let prejuizoVinho = litrosPerdidos * valorLitro;
-        let prejuizoCultivo = custoCultivo * taxaPerda;
-        let prejuizoTotal = prejuizoVinho + prejuizoCultivo;
+        let prejuizoVinho = litrosPerdidos * valorLitro * armazenamento;
+        let prejuizoTotal = prejuizoVinho;
 
         let prejuizoPorArmazenamento = prejuizoTotal / armazenamento;
 
         p_resultado.innerHTML = `
-    <h2>
-        O CO₂ntrol pode evitar cerca de <strong><span class="txt_destaque">
-        ${prejuizoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-        </span></strong> em perdas por ciclo.
-    </h2>
+    <p>
+        Com o monitoramento inteligente da fermentação do mosto da CO<sub>2</sub>ntrol sua vinicola pode alcançar uma produção estimada de até <span style="background-color: #00a100; color: white; padding: 1px"><b>${capacidadeTotal.toFixed(2)}L</b></span>, representando um potencial de faturamento bruto de <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal * valorLitro).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo.
+    </p>
+    <p>
+        Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até <span style="background-color: #a00000; color: white; padding: 1px"><b>${(capacidadeTotal - litrosPerdidos * armazenamento).toLocaleString('pt-BR')}L</b></span> com faturamento bruto aproximado de <span style="background-color: #a00000; color: white; padding: 1px"><b>${((capacidadeTotal * valorLitro) - prejuizoVinho).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo.
+    </p>
+    <p>
+        Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)).toLocaleString('pt-BR')}L</b></span> por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: <span style="background-color: #00a100; color: white; padding: 1px"><b>${((capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)) * valorLitro).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo de produção.
+    </p>
+`;
 
-    <h3>
-        Isso considera aproximadamente ${taxaPerda * 100}% de perda na produção.
-        <br><br>
-        
-        Por tanque: <strong><span class="txt_destaque">
-        ${prejuizoPorArmazenamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-        </span></strong>
-        <br><br>
+    // Com nosso monitoramento inteligente da fermentação do mosto, sua vinicola pode alcançar uma produção estimada de até (producaoTotal) representando um potencial de faturamento bruto de (producaoTotal * valorVendaLitro) por ciclo.
+    // Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até (producaoTotal - litrosPerdidos) com faturamento bruto aproximado de R$ (producaoTotal - prejuizoFinanceiro) por ciclo.
+    // Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente (producaoTotal - litrosPerdidos) L por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: R$ (producaoTotal*valorVendaLitro - prejuizoFinanceiro) por ciclo de produção.
 
-        Além disso, evita o desperdício de cerca de <strong>${tempoGasto} meses</strong> de cultivo.
-    </h3>`;
+    // TODOS esses dados são estimados pela EMBRAPA.
+    // O preço do kg do tomate pode variar de acordo com a região e a época do ano, mas para fins de análise, utilizamos o valor inserido pelo produtor.
     }
 </script>
