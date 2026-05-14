@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Armazenamento | Sistema Industrial</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/cadastro-tanque.css">
+    
+</head>
+
+<body>
+
+<div class="sair">
+    <a href="tanques.html">
+        <button>EXIT</button>
+    </a>
+</div>
+
+<div class="conteudo-cadastro">
+
+    <div class="cadastro-titulo">
+        <h1>Cadastre o seu Armazenamento</h1>
+    </div>
+
+    <div class="inputs-cadastro">
+        <span>Nome do Identificador</span>
+        <input type="text" id="ipt_nomeIdentificador">
+
+        <span>Localização do Tanque</span>
+        <input type="text" id="ipt_local">
+
+        <span>Tipo:</span>
+        <select id="tipo" name="tipo" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="TANQUE">TANQUE</option>
+            <option value="FOUDRE">FOUDRE</option>
+        </select>
+    </div>
+
+    <div class="input-capacidade">
+        <span>Capacidade (L)</span>
+        <input type="text" id="ipt_capacidade">
+    </div>
+
+    <div class="status-uso">
+        <span>Status de Uso</span>
+        <select id="utilizacao" name="utilizacao" required>
+            <option value="1">Em Uso (Ativo)</option>
+            <option value="0">Disponível (Inativo)</option>
+        </select>
+    </div>
+
+    <button type="submit" class="botao-salvar">
+        Salvar Registro
+    </button>
+
+</div>
+
+</body>
+</html>
