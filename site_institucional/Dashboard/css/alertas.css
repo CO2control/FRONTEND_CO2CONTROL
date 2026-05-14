@@ -90,7 +90,6 @@ span {
 
 .main {
     flex: 1;
-    padding: 20px;
 
     display: flex;
     flex-direction: column;
@@ -107,12 +106,12 @@ span {
 }
 
 .main-header select {
-    border-radius: 10px;
+    border-radius: 3px;
+    height: 50%;
+    padding: 5px;
+    border: 2px solid #5a0a0a;
 }
 
-.filter-select {
-    height: 50%;
-}
 
 .alerts {
     width: 100%;
@@ -204,5 +203,17 @@ span {
     align-items: center;
     gap: 10px;
 }
+
+.alerts-header {
+    padding: 15px;
+    background-color: rgb(226, 225, 225);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 2px solid #5a0a0a;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 
