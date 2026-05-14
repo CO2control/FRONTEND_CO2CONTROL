@@ -49,6 +49,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
+    color: white;
 }
 
 .item:hover {
@@ -59,6 +60,7 @@ body {
     width: 30px;
     margin-right: 10px;
 }
+
 
 .kpi img{
     width: 25px;
@@ -190,4 +192,36 @@ a{
 
 span{
     color: white;
+}
+
+
+/* SUBMENU TANQUES*/
+.submenu{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submenu a{
+    width: 100%;
+    padding: 10px 50px;
+    border-radius: 12px;
+
+    background-color: #81151573;
+    color: white;
+    text-decoration: none;
+}
+
+.submenu-item{
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.submenu-item:hover{
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+.ativo{
+    display: flex;
 }

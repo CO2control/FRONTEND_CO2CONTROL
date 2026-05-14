@@ -25,17 +25,41 @@
 
             <div class="menu">
                 <a href="dashboard.html">
-                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Dashboard</span></div>
+                    <div class="item"><img src="./assets/iconNav.png" alt="">
+                        <p>Dashboard</p>
+                    </div>
                 </a>
-                <a href="tanques.html">
-                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
-                </a>
-                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
-                <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
-                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
-                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div>
+
+
+                <div class="item" onclick="abrirTanques()">
+                    <img src="./assets/tanque.png" alt="">
+                    <p>Tanques</p>
+                </div>
+
+                <div class="submenu" id="submenuTanques">
+
+                    <a href="tanques.html">
+                        <div class="submenu-item">Tanque 1</div>
+                    </a>
+
+                    <a href="">
+                        <div class="submenu-item">Tanque 2</div>
+                    </a>
+
+                    <a href="">
+                        <div class="submenu-item">Tanque 3</div>
+                    </a>
+
+                </div>
+
+
+                <div class="item"><img src="./assets/alerta.png" alt="">
+                    <p>Alertas</p>
+                </div>
                 <a href="../index.html">
-                    <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+                    <div class="item"><img src="./assets/porta.png" alt="">
+                        <p>Sair</p>
+                    </div>
                 </a>
             </div>
 
@@ -49,31 +73,33 @@
             <!-- KPIs -->
             <div class="kpis">
 
-                <div class="kpi">
+                <div class="kpi sombra1">
                     <div class="kpi-title"><span>Tanque</span></div>
                     <div class="kpi-value"><span>1</span></div>
                     <img src="./assets/wi-fi.png" alt="">
                 </div>
 
-                <div class="kpi">
+                <div class="kpi sombra2">
                     <div class="kpi-title"><span>Máximo Atingido</span></div>
                     <div class="kpi-value"><span>70%</span></div>
                     <div class="kpi-ruim"></div>
                     <div class="kpi_media"></div>
                     <img src="./assets/high.png" alt="">
+                    <span id="legenda">Dia 14/05/2026 ás 13Hrs</span id="legenda">
                 </div>
 
-                <div class="kpi">
+                <div class="kpi sombra3">
                     <div class="kpi-title"><span>Tendência atual</span></div>
                     <img src="./assets/seta-para-baixo.png" alt="">
                     <div class="kpi-value"><span>Queda</span></div>
                     <div class="sinal"><span>Bom</span></div>
                 </div>
 
-                <div class="kpi">
+                <div class="kpi sombra4">
                     <div class="kpi-title"><span>Alertas emitidos hoje</span></div>
                     <div class="kpi-value">3</div>
                     <img src="./assets/alarme.png" alt="">
+                    <span id="legenda">Último: Dia 14/05/2026 ás 13Hrs</span id="legenda">
                 </div>
 
             </div>
@@ -83,16 +109,19 @@
             <!-- CONTEÚDO -->
             <div class="content">
 
-                <div class="pesquisa">
-                    <input type="text" id="inputBusca" placeholder="Pesquisar tanque (ex: Tanque 2)...">
-                    <button onclick="buscarTanque()">Buscar</button>
-                </div>
+                <!-- <div class="pesquisa">
+                        <input type="text" id="inputBusca" placeholder="Pesquisar tanque (ex: Tanque 2)...">
+                        <button onclick="buscarTanque()">Buscar</button>
+                    </div> -->
 
                 <!-- GRÁFICOS -->
                 <div class="charts">
 
                     <div class="chart-um">
-                        <div class="titulo"><span>Nível de CO2</span></div>
+                        <div class="titulo">
+                            <span>Nível de CO2 - </span>
+                            <span id="dataAtual"></span>
+                        </div>
                         <canvas id="chart1"></canvas>
                     </div>
 
@@ -102,7 +131,24 @@
                         <div class="kpi-value"><span>Status: Regular</span></div>
                     </div>
 
+                </div>
+            </div>
 
+            <div class="final">
+
+                <div class="botoes">
+
+                    <a href="atualizar-tanques.html" class="botao">
+                        <span>Atualizar Tanque</span>
+                    </a>
+
+                     <a href="cadastro-tanque.html" class="botao">
+                       <span>Cadastrar Tanques</span>
+                    </a>
+
+                    <a onclick="excluir()" class="botao">
+                       <span>Excluir Tanque</span>
+                    </a>
                 </div>
 
             </div>
@@ -111,7 +157,33 @@
     </div>
 
     <script>
-        Chart.defaults.color = '#ffffff';
+
+        function excluir(){
+            if(confirm('Tem certeza?')){
+                console.log('deletar')
+            } else {
+                console.log('erro')
+            }
+        }
+
+        function abrirTanques() {
+
+            let submenuNovo = document.getElementById("submenuTanques");
+
+            if (submenuNovo.className == "submenu") {
+                submenuNovo.className = "submenu ativo";
+            } else {
+                submenuNovo.className = "submenu";
+            }
+        }
+
+
+        Chart.defaults.color = '#000';
+
+
+        let data = new Date();
+        document.getElementById("dataAtual").innerHTML = data.toLocaleDateString("pt-BR");
+
 
         // GRÁFICO 1
         new Chart(document.getElementById('chart1'), {
@@ -156,12 +228,12 @@
                         beginAtZero: true,
                         max: 100,
                         ticks: {
-                            color: 'rgb(244,244,244)'
+                            color: '#000'
                         }
                     },
                     x: {
                         ticks: {
-                            color: 'rgb(244,244,244)'
+                            color: '#000'
                         }
                     },
                 }
@@ -173,7 +245,7 @@
             type: 'doughnut',
             data: {
                 labels: ['Nível atual de CO2', 'Máximo'],
-                datasets: [ {
+                datasets: [{
                     label: 'Faixa Ideal',
                     data: [1],
                     backgroundColor: ['transparent', 'transparent'],
@@ -184,7 +256,7 @@
                     rotation: 306
                 }, {
                     data: [30, 70], // PRIMEIRO PARAMETRO: NIVEL EM (%), SEGUNDO: 100 - NÍVEL (AMBOS EM PORCENTAGEM)
-                    backgroundColor: ['lightgray', 'rgba(255,255,255,0.1)'],
+                    backgroundColor: ['red', '#d3c9c9'],
                     borderWidth: 0,
                     circumference: 180,
                     rotation: 270
@@ -197,7 +269,7 @@
                     borderWidth: 3,
                     circumference: 36,
                     rotation: 306
-                    }            
+                }
                 ]
             },
             options: {
