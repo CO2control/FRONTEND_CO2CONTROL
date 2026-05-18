@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas - CO2</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/alertas.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+                <img src="./assets/logo.png" alt="">
+            </div>
+
+            <div class="menu">
+                <a href="dashboard.html">
+                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Visão geral</span></div>
+                </a>
+                <a href="tanques.html">
+                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
+                </a>
+                <a href="#">
+                    <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
+                </a>
+                <!-- <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
+                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
+                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div> -->
+                <a href="../index.html">
+                    <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+                </a>
+            </div>
+
+
+
+        </div>
+
+        <!-- MAIN -->
+        <div class="main">
+            <div class="main-header">
+                <div class="alerts-header">
+                    <div>
+                        <h1 style="color: #5a0a0a;">Alertas - (Nome da vinicola)</h1>
+                        <p>Exibindo <b>4</b> alertas no total.</p>
+                    </div>
+                    <select class="filter-select">
+                        <option disabled >Filtrar por:</option>
+                        <option selected>Local</option>
+                        <option>Nível</option>
+                        <option>Nome (crescente)</option>
+                        <option>Nome (descrescente)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alerts">
+                <div class="alert-card">
+                    <div class="alert-critical-status-color"></div>
+                    <div class="alert-content">
+                        <div class="alert-summary">
+                            <h3>Alerta - 001</h3>
+                            <h3>Tanque - 001</h3>
+                            <h3>Local - Bloco C</h3>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Nível: Crítico</h3>
+                                </div>
+                                <div class="alert-level-value">
+                                    <h2>80%</h2>
+                                </div>
+                            </div>
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Momento:</h3>
+                                </div>
+                                <div class="alert-time-value">
+                                    <h2>17:53</h2>
+                                    <h2>13/05/2026</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-card">
+                    <div class="alert-critical-status-color"></div>
+                    <div class="alert-content">
+                        <div class="alert-summary">
+                            <h3>Alerta - 002</h3>
+                            <h3>Tanque - 003</h3>
+                            <h3>Local - Bloco B</h3>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Nível: Crítico</h3>
+                                </div>
+                                <div class="alert-level-value">
+                                    <h2>80%</h2>
+                                </div>
+                            </div>
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Momento:</h3>
+                                </div>
+                                <div class="alert-time-value">
+                                    <h2>17:53</h2>
+                                    <h2>13/05/2026</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-card">
+                    <div class="alert-high-status-color"></div>
+                    <div class="alert-content">
+                        <div class="alert-summary">
+                            <h3>Alerta - 003</h3>
+                            <h3>Tanque - 027</h3>
+                            <h3>Local - Bloco A</h3>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Nível: Alto</h3>
+                                </div>
+                                <div class="alert-level-value">
+                                    <h2>60%</h2>
+                                </div>
+                            </div>
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Momento:</h3>
+                                </div>
+                                <div class="alert-time-value">
+                                    <h2>17:53</h2>
+                                    <h2>13/05/2026</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-card">
+                    <div class="alert-high-status-color"></div>
+                    <div class="alert-content">
+                        <div class="alert-summary">
+                            <h3>Alerta - 004</h3>
+                            <h3>Tanque - 006</h3>
+                            <h3>Local - Bloco B</h3>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Nível: Alto</h3>
+                                </div>
+                                <div class="alert-level-value">
+                                    <h2>60%</h2>
+                                </div>
+                            </div>
+                            <div class="alert-level-box">
+                                <div class="alert-level-div">
+                                    <h3>Momento:</h3>
+                                </div>
+                                <div class="alert-time-value">
+                                    <h2>17:53</h2>
+                                    <h2>13/05/2026</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+    </script>
+
+</body>
+
+</html>

@@ -25,8 +25,11 @@
 
             <div class="menu">
                 <a href="dashboard.html">
-                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Dashboard</span></div>
+                    <div class="item"><img src="./assets/iconNav.png" alt="">
+                        <p>Dashboard</p>
+                    </div>
                 </a>
+<<<<<<< HEAD
                 <a href="tanques.html">
                     <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
                 </a>
@@ -34,8 +37,39 @@
                 <!-- <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
                 <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
                 <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div> -->
+=======
+
+
+                <div class="item" onclick="abrirTanques()">
+                    <img src="./assets/tanque.png" alt="">
+                    <p>Tanques</p>
+                </div>
+
+                <div class="submenu" id="submenuTanques">
+
+                    <a href="tanques.html">
+                        <div class="submenu-item">Tanque 1</div>
+                    </a>
+
+                    <a href="">
+                        <div class="submenu-item">Tanque 2</div>
+                    </a>
+
+                    <a href="">
+                        <div class="submenu-item">Tanque 3</div>
+                    </a>
+
+                </div>
+
+
+                <div class="item"><img src="./assets/alerta.png" alt="">
+                    <p>Alertas</p>
+                </div>
+>>>>>>> 4c4996254f42bb9f8f96cf217afdb68561f89f84
                 <a href="../index.html">
-                    <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+                    <div class="item"><img src="./assets/porta.png" alt="">
+                        <p>Sair</p>
+                    </div>
                 </a>
             </div>
 
@@ -49,30 +83,33 @@
             <!-- KPIs -->
             <div class="kpis">
 
-                <div class="kpi">
+                <div class="kpi sombra1">
                     <div class="kpi-title"><span>Tanque</span></div>
                     <div class="kpi-value"><span>1</span></div>
                     <img src="./assets/wi-fi.png" alt="">
                 </div>
 
-                <div class="kpi">
+                <div class="kpi sombra2">
                     <div class="kpi-title"><span>Máximo Atingido</span></div>
-                    <div class="kpi-value"><span>19%</span></div>
+                    <div class="kpi-value"><span>70%</span></div>
                     <div class="kpi-ruim"></div>
                     <div class="kpi_media"></div>
                     <img src="./assets/high.png" alt="">
+                    <span id="legenda">Dia 14/05/2026 ás 13Hrs</span id="legenda">
                 </div>
 
-                <div class="kpi">
-                    <div class="kpi-title"><span>Nível Médio do tanque</span></div>
-                    <div class="kpi-value"><span>5%</span></div>
+                <div class="kpi sombra3">
+                    <div class="kpi-title"><span>Tendência atual</span></div>
+                    <img src="./assets/seta-para-baixo.png" alt="">
+                    <div class="kpi-value"><span>Queda</span></div>
                     <div class="sinal"><span>Bom</span></div>
                 </div>
 
-                <div class="kpi">
+                <div class="kpi sombra4">
                     <div class="kpi-title"><span>Alertas emitidos hoje</span></div>
-                    <div class="kpi-value">0</div>
+                    <div class="kpi-value">3</div>
                     <img src="./assets/alarme.png" alt="">
+                    <span id="legenda">Último: Dia 14/05/2026 ás 13Hrs</span id="legenda">
                 </div>
 
             </div>
@@ -82,25 +119,46 @@
             <!-- CONTEÚDO -->
             <div class="content">
 
-                <div class="pesquisa">
-                    <input type="text" id="inputBusca" placeholder="Pesquisar tanque (ex: Tanque 2)...">
-                    <button onclick="buscarTanque()">Buscar</button>
-                </div>
+                <!-- <div class="pesquisa">
+                        <input type="text" id="inputBusca" placeholder="Pesquisar tanque (ex: Tanque 2)...">
+                        <button onclick="buscarTanque()">Buscar</button>
+                    </div> -->
 
                 <!-- GRÁFICOS -->
                 <div class="charts">
 
                     <div class="chart-um">
-                        <div class="titulo"><span>Nível de CO2</span></div>
+                        <div class="titulo">
+                            <span>Nível de CO2 - </span>
+                            <span id="dataAtual"></span>
+                        </div>
                         <canvas id="chart1"></canvas>
                     </div>
 
                     <div class="chart-dois">
                         <div class="titulo"><span>Nível Atual</span></div>
                         <canvas id="chartGauge"></canvas>
+                        <div class="kpi-value"><span>Status: Regular</span></div>
                     </div>
 
+                </div>
+            </div>
 
+            <div class="final">
+
+                <div class="botoes">
+
+                    <a href="atualizar-tanques.html" class="botao">
+                        <span>Atualizar Tanque</span>
+                    </a>
+
+                     <a href="cadastro-tanque.html" class="botao">
+                       <span>Cadastrar Tanques</span>
+                    </a>
+
+                    <a onclick="excluir()" class="botao">
+                       <span>Excluir Tanque</span>
+                    </a>
                 </div>
 
             </div>
@@ -109,7 +167,33 @@
     </div>
 
     <script>
-        Chart.defaults.color = '#ffffff';
+
+        function excluir(){
+            if(confirm('Tem certeza?')){
+                console.log('deletar')
+            } else {
+                console.log('erro')
+            }
+        }
+
+        function abrirTanques() {
+
+            let submenuNovo = document.getElementById("submenuTanques");
+
+            if (submenuNovo.className == "submenu") {
+                submenuNovo.className = "submenu ativo";
+            } else {
+                submenuNovo.className = "submenu";
+            }
+        }
+
+
+        Chart.defaults.color = '#000';
+
+
+        let data = new Date();
+        document.getElementById("dataAtual").innerHTML = data.toLocaleDateString("pt-BR");
+
 
         // GRÁFICO 1
         new Chart(document.getElementById('chart1'), {
@@ -118,37 +202,51 @@
                 labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
                 datasets: [{
                     label: 'CO2',
-                    data: [0, 2, 3, 12, 19, 3, 5, 2, 3, 5, 8],
+                    data: [0, 25, 30, 45, 50, 70, 40, 30, 50, 40, 30],
                     borderColor: 'red',
                     tension: 0.4,
                     pointRadius: 4,
                     pointBackgroundColor: '#fff',
                     pointBorderColor: 'red',
                     pointBorderWidth: 1,
-                    fill: true
+                    fill: false
                 }, {
                     label: 'Minimo Ideal',
-                    data: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
                     borderColor: 'green',
                     tension: 0.4,
                     pointBorderColor: 'green',
                     borderDash: [5, 5],
                     pointBorderWidth: 2,
-                    fill: true
+                    fill: -1
                 }, {
                     label: 'Maximo Ideal',
-                    data: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+                    data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
                     borderColor: 'green',
                     tension: 0.4,
                     pointBorderColor: 'green',
                     borderDash: [5, 5],
                     pointBorderWidth: 2,
-                    fill: true
+                    fill: false
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#000'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#000'
+                        }
+                    },
+                }
             }
         });
 
@@ -156,14 +254,33 @@
         new Chart(document.getElementById('chartGauge'), {
             type: 'doughnut',
             data: {
-                labels: ['Ocupado', 'Livre'],
+                labels: ['Nível atual de CO2', 'Máximo'],
                 datasets: [{
-                    data: [8.2, 91.8],
-                    backgroundColor: ['#ff4d4d', 'rgba(255,255,255,0.1)'],
+                    label: 'Faixa Ideal',
+                    data: [1],
+                    backgroundColor: ['transparent', 'transparent'],
+                    weight: 0.01,
+                    borderColor: 'green',
+                    borderWidth: 3,
+                    circumference: 36,
+                    rotation: 306
+                }, {
+                    data: [30, 70], // PRIMEIRO PARAMETRO: NIVEL EM (%), SEGUNDO: 100 - NÍVEL (AMBOS EM PORCENTAGEM)
+                    backgroundColor: ['red', '#d3c9c9'],
                     borderWidth: 0,
                     circumference: 180,
                     rotation: 270
-                }]
+                }, {
+                    label: 'Faixa Ideal',
+                    data: [1],
+                    backgroundColor: ['transparent', 'transparent'],
+                    weight: 0.01,
+                    borderColor: 'green',
+                    borderWidth: 3,
+                    circumference: 36,
+                    rotation: 306
+                }
+                ]
             },
             options: {
                 aspectRatio: 1.5,
