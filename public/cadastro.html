@@ -41,9 +41,6 @@
                 <span>Insira o seu nome:</span>
                 <input type="texte" id="ipt_nome">
 
-                <span>Insira o seu Telefone (Ex: 11912345678):</span>
-                <input type="number" id="ipt_telefone">
-
                 <span>Insira o seu Email:</span>
                 <input type="email" id="ipt_email">
 
@@ -54,7 +51,7 @@
                 <input type="password" id="ipt_novamenteSenha">
 
                 <div class="avancar">
-                    <button onclick="validarCadastro()">CADASTRAR</button>
+                    <button onclick="cadastrar()">CADASTRAR</button>
 
                     <h6>Ja possui conta? <a href="login.html">Faça Login</a></h6>
                 </div>
@@ -73,7 +70,6 @@
 <script>
     function validarCadastro() {
         let nome = ipt_nome.value;
-        let telefone = ipt_telefone.value;
         let email = ipt_email.value;
         let senha = ipt_senha.value;
         let senhaNovamente = ipt_novamenteSenha.value;
@@ -87,90 +83,134 @@
         //Usar regex para validação da senha
         //Usar laço de repetição
 
-        if (ipt_codigo == "" || nome == "" || telefone == "" || email == "" || senha == "" || senhaNovamente == "") {
+        if (ipt_codigo == "" || nome == "" || email == "" || senha == "" || senhaNovamente == "") {
             alert("Erro: Preencha todos os campos para prosseguir.");
         } else {
 
 
             //Validação da quantidade de caracteres do número de telefone
-            if (telefone.length == 11) {
 
-                //Posição do arroba começa com -1, pois se ele for 0 já está errado, então para validar dele ser maior q 0
-                let posicaoArroba = - 1;
 
-                let pontoDepoisDoArroba = false;
+            //Posição do arroba começa com -1, pois se ele for 0 já está errado, então para validar dele ser maior q 0
+            let posicaoArroba = - 1;
 
-                for (let i = 0; i < email.length; i++) {
+            let pontoDepoisDoArroba = false;
 
-                    //Somente para pegar a posição do arroba
-                    if (email[i] == '@') {
-                        posicaoArroba = i;
-                    }
+            for (let i = 0; i < email.length; i++) {
 
-                    // Se a posição do arroba não é a mesmsma de origem que é - 1 e a o email[i] onde a lógica é maior que a posicaoArroba tiver o ponto, ele entra na verificação.
-                    if (posicaoArroba != - 1 && email[i] == '.') {
-                        if (i < email.length - 1 && i > posicaoArroba + 1) {       // Se a posição desse ponto for menor que o tamanho do email, ou seja, não pode ser o último,
-                            // e o i QUE REMETE A POSIÇÃO DO PONTO for maior que a  posicao do arroba  + 1(Pois o ponto não pode ser depois do arroba, então tem que ter um caractere que não seja ponto depois)
-                            pontoDepoisDoArroba = true;
-                        }
-                    }
+                //Somente para pegar a posição do arroba
+                if (email[i] == '@') {
+                    posicaoArroba = i;
                 }
 
-                // So pra pegar o tamanho do email
-                let tamanhoEmail = email.length - 1;
-
-                //Validação dos campos, se estão em posições incorretas, do padrão
-                if (posicaoArroba <= 0 || posicaoArroba == tamanhoEmail || !pontoDepoisDoArroba) {
-                    alert("Email inválido! Certifique-se de que o email está correto (ex: @gmail.com)");
-                } else {
-
-                    // Critério: Mínimo 8 caracteres, 1 letra maiúscula, 1 minúscula- e 1 número  PEGUEI O REGEX Montado pela IA
-                    // Verifica se existe pelo menos UMA letra maiúscula
-                    let temMaiuscula = /[A-Z]/;
-
-                    // Verifica se existe pelo menos UM número
-                    let temNumero = /[0-123456789]/;
-
-                    // Verifica se existe pelo menos UM caractere especial
-                    // (Tudo que NÃO for letra ou número)
-                    let temEspecial = /[^a-zA-Z0-9]/;
-
-                    //Verifica se existe letra maiuscula
-                    let temMinuscula = /[a-z]/;
-
-
-                    //Validação para o tamanho da senha (Mínimo 8 caracteres!!!!!)
-                    if (senha.length < 8) {
-                        alert("A senha deve ter no mínimo 8 caracteres.");
-                    } else if (!temMaiuscula.test(senha)) {
-                        alert("A senha deve conter ao menos uma letra maiúscula.");
-                    } else if (!temMinuscula.test(senha)) {
-                        alert("Erro no cadastro, Falta uma letra minúscula");
-                    } else if (!temNumero.test(senha)) {  //Validação para saber senao tem número na senha coloquei 
-                        alert("A senha deve conter ao menos um número.");
-                    } else if (!temEspecial.test(senha)) { //Validação para saber senao tem caractere na senha coloquei 
-                        alert("A senha deve conter ao menos um caractere especial (!@#$...).");
-                    } else {
-                        if (senha == senhaNovamente) {
-                            alert("Concluíndo Cadastro...");
-                            alert("Cadastro realizado com sucesso! Bem-vindo ao CO₂NTROL.");
-                            window.location = 'login.html'
-                        } else {
-                            alert("As senhas não coincidem!");
-                        }
+                // Se a posição do arroba não é a mesmsma de origem que é - 1 e a o email[i] onde a lógica é maior que a posicaoArroba tiver o ponto, ele entra na verificação.
+                if (posicaoArroba != - 1 && email[i] == '.') {
+                    if (i < email.length - 1 && i > posicaoArroba + 1) {       // Se a posição desse ponto for menor que o tamanho do email, ou seja, não pode ser o último,
+                        // e o i QUE REMETE A POSIÇÃO DO PONTO for maior que a  posicao do arroba  + 1(Pois o ponto não pode ser depois do arroba, então tem que ter um caractere que não seja ponto depois)
+                        pontoDepoisDoArroba = true;
                     }
-
                 }
+            }
 
+            // So pra pegar o tamanho do email
+            let tamanhoEmail = email.length - 1;
+
+            //Validação dos campos, se estão em posições incorretas, do padrão
+            if (posicaoArroba <= 0 || posicaoArroba == tamanhoEmail || !pontoDepoisDoArroba) {
+                alert("Email inválido! Certifique-se de que o email está correto (ex: @gmail.com)");
             } else {
-                alert("Insira um número válido com 11 dígitos (DDD + Número)!");
+
+                // Critério: Mínimo 8 caracteres, 1 letra maiúscula, 1 minúscula- e 1 número  PEGUEI O REGEX Montado pela IA
+                // Verifica se existe pelo menos UMA letra maiúscula
+                let temMaiuscula = /[A-Z]/;
+
+                // Verifica se existe pelo menos UM número
+                let temNumero = /[0-123456789]/;
+
+                // Verifica se existe pelo menos UM caractere especial
+                // (Tudo que NÃO for letra ou número)
+                let temEspecial = /[^a-zA-Z0-9]/;
+
+                //Verifica se existe letra maiuscula
+                let temMinuscula = /[a-z]/;
+
+
+                //Validação para o tamanho da senha (Mínimo 8 caracteres!!!!!)
+                if (senha.length < 8) {
+                    alert("A senha deve ter no mínimo 8 caracteres.");
+                } else if (!temMaiuscula.test(senha)) {
+                    alert("A senha deve conter ao menos uma letra maiúscula.");
+                } else if (!temMinuscula.test(senha)) {
+                    alert("Erro no cadastro, Falta uma letra minúscula");
+                } else if (!temNumero.test(senha)) {  //Validação para saber senao tem número na senha coloquei 
+                    alert("A senha deve conter ao menos um número.");
+                } else if (!temEspecial.test(senha)) { //Validação para saber senao tem caractere na senha coloquei 
+                    alert("A senha deve conter ao menos um caractere especial (!@#$...).");
+                } else {
+                    if (senha == senhaNovamente) {
+                        return true
+                    } else {
+                        alert("As senhas não coincidem!");
+                    }
+                }
+
             }
 
 
 
 
         }
+    }
 
+    function cadastrar() {
+        let codAtivacao = ipt_codigo.value
+        let nome = ipt_nome.value;
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let senhaNovamente = ipt_novamenteSenha.value;
+
+        fetch(`/empresas/buscarEmpresaPorCodigo/${codAtivacao}`).then(response => {
+            if (response.ok) {
+                console.log('entrou')
+                response.json().then(resposta => {
+                    let fkEmpresa = resposta[0].id
+                    if (validarCadastro()) {
+                        console.log('entrou2')
+                        fetch(`/usuarios/cadastrar`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                emailServer: email,
+                                senhaServer: senha,
+                                nomeServer: nome,
+                                fkEmpresaServer: fkEmpresa
+                            })
+                        }).then(response => {
+                            console.log('entrou3')
+
+                            if (response.ok) {
+                                console.log("Cadastro realizado")
+                                alert('Cadastro realizado')
+                                window.location.href = 'login.html'
+                            } else {
+                                throw "Houve um erro ao realizar o cadastro"
+                            }
+                        }).catch(erro => {
+                            console.error("Ocorreu um erro ao cadastrar usuario: ", erro)
+                        })
+                    } else {
+                        console.error('Impossível realizar o cadastro, campos inválidos.')
+                    }
+                })
+
+            } else {
+                throw 'Houve um erro ao buscar a empresa'
+            }
+        }).catch(erro => {
+            console.error("Ocorreu um erro: ", erro)
+        })
 
 
     }
