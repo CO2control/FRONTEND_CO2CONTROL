@@ -7,109 +7,197 @@
     <title>Dashboard CO2</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../Dashboard/css/dashboard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-
     <div class="container">
-
         <!-- SIDEBAR -->
         <div class="sidebar">
-
             <div class="logo">
-                <img src="./assets/logo.png" alt="">
+                <img src="./assets/logo.png" alt="Logo">
             </div>
 
             <div class="menu">
                 <a href="dashboard.html">
-                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Dashboard</span></div>
+                    <div class="item">
+                        <img src="./assets/iconNav.png" alt="">
+                        <p>Dashboard</p>
+                    </div>
                 </a>
                 <a href="tanques.html">
-                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
+                    <div class="item">
+                        <img src="./assets/tanque.png" alt="">
+                        <p>Tanques</p>
+                    </div>
                 </a>
-                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
-                <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
-                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
-                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div>
+                <div class="item">
+                    <img src="./assets/alerta.png" alt="">
+                    <p>Alertas</p>
+                </div>
                 <a href="../index.html">
-                    <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+                    <div class="item">
+                        <img src="./assets/porta.png" alt="">
+                        <p>Sair</p>
+                    </div>
                 </a>
             </div>
-
-
-
         </div>
 
         <!-- MAIN -->
         <div class="main">
-
             <!-- KPIs -->
             <div class="kpis">
-
-                <div class="kpi">
+                <div class="kpi kpi-verde">
                     <div class="kpi-title"><span>Sensores Ativos</span></div>
                     <div class="kpi-value"><span>12/15</span></div>
                     <img src="./assets/wi-fi.png" alt="">
                 </div>
-
-                <div class="kpi">
+                <div class="kpi kpi-amarela">
                     <div class="kpi-title"><span>Tanques em Alertas</span></div>
                     <div class="kpi-value"><span>2</span></div>
                     <img src="./assets/alertaColor.png" alt="">
                 </div>
-
-                <div class="kpi">
-                    <div class="kpi-title"><span>Quantidade de Tanques ativos</span></div>
-                    <div class="kpi-value"><span>12/18</span></div>
+                <div class="kpi kpi-vermelha">
+                    <div class="kpi-title"><span>Tanque com Maior Variação</span></div>
+                    <div class="kpi-value"><span>T007</span></div>
                     <img src="./assets/armazenamentoIndivdual.png" alt="">
                 </div>
-
-                <div class="kpi">
-                    <div class="kpi-title"><span>Alertas Hoje</span></div>
-                    <div class="kpi-value"><span>2</span></div>
+                <div class="kpi kpi-vermelha">
+                    <div class="kpi-title"><span>Tanque com Mais Alertas</span></div>
+                    <div class="kpi-value"><span>T003</span></div>
                     <img src="./assets/alarme.png" alt="">
                 </div>
-
             </div>
 
             <!-- CONTEÚDO -->
             <div class="content">
+                <!-- LISTA -->
+                <div id="lista">
+                    <!-- Agrupamos o topo e os controles para usar Flexbox -->
+                    <div class="lista-header">
+                        <div class="titulo-wrapper">
+                            <img class="tempoReal" src="simboloVerde.png" alt="">
+                            <h2 id="head_lista">Todos os tanques</h2>
+                            <button class="button3">CADASTRAR TANQUE</button>
+                        </div>
+                        
+                        <div class="controles-wrapper">
+                            <input type="text" id="ipt_pesq" placeholder="Digite o nome do seu tanque">
+                            <button class="button1">PESQUISAR</button>
+                            <select id="ipt_nota" class="button2">
+                                <option value="x">FILTRAR</option>
+                                <option value="5">Alerta</option>
+                                <option value="4">Crítico</option>
+                                <option value="3">Bom</option>
+                                <option value="2">Recentes</option>
+                            </select>
+                            
+                        </div>
+                    </div>
 
-                <!-- GRÁFICOS -->
-                <div class="charts">
+                    <div class="tanques_lista">
+                        <div class="elemento_lista">
+                            <div class="head_elemento_lista">
+                                <div class="etiqueta_vermelho"></div>
+                                Tanque A01
+                            </div>
+                            <div class="corpo_elemento_lista">
+                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 73,6%</span>
+                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco A</span>
+                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 02/02/1981</span>
+                            </div>
+                        </div>
 
-                    <div class="chart">
-                        <div class="titulo">Variação</div>
-                        <canvas id="chart2"></canvas>
+                        <div class="elemento_lista">
+                            <div class="head_elemento_lista">
+                                <div class="etiqueta_verde"></div>
+                                Tanque A02
+                            </div>
+                            <div class="corpo_elemento_lista">
+                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 39,5%</span>
+                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco C</span>
+                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 18/06/2022</span>
+                            </div>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <div class="head_elemento_lista">
+                                <div class="etiqueta_amarelo"></div>
+                                Tanque A03
+                            </div>
+                            <div class="corpo_elemento_lista">
+                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 26,97%</span>
+                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco B</span>
+                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 30/01/2026</span>
+                            </div>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
+
+                        <div class="elemento_lista">
+                            <span class="add_tanque">
+                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
+                                <span>Cadastre seu tanque!</span>
+                            </span>
+                        </div>
                     </div>
 
                 </div>
 
                 <!-- ALERTAS -->
                 <div class="alerts">
-
-                    <div class="titulo">Alertas</div>
-
+                    <div class="titulo">ALERTAS | 3 alertas emitidos hoje</div>
                     <div class="alert">
-                        <span>CO2 Alto - Tanque #001 <span>13/04/2026 - 13:57</span>
-                        </span>
+                        <span>CO2 CRÍTICO - Tanque #001 <br><span>13/04/2026 - 13:57</span></span>
                     </div>
-                    <div class="alert"><span>CO2 Alto - Tanque #002 <span>13/04/2026 - 14:51</span></span></div>
-                    <div class="alert"><span>CO2 Alto - Tanque #003 <span>06/04/2026 - 11:55</span></span></div>
-
+                    <div class="alert2">
+                        <span>CO2 ALTO - Tanque #002 <br><span>13/04/2026 - 14:51</span></span>
+                    </div>
+                    <div class="alert">
+                        <span>CO2 CRÍTICO - Tanque #003 <br><span>06/04/2026 - 11:55</span></span>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
     <script>
-        Chart.defaults.color = '#ffffff';
+        Chart.defaults.color = '#rgb(11, 8, 8)';
 
         new Chart(document.getElementById('chart2'), {
             type: 'bar',
@@ -119,8 +207,8 @@
                     {
                         label: 'CO2 por Tanque',
                         data: [null, 5, 8, 6, 10, 7, null],
-                        backgroundColor: 'rgb(114, 47, 55)',
-                        borderColor: 'white',
+                        backgroundColor: '#a31515',
+                        borderColor: 'rgb(11, 8, 8)',
                         borderWidth: 2,
                         borderRadius: 5,
                         order: 2,
