@@ -48,6 +48,7 @@
             </div>
         </div>
     </div>
+    <a href="Dashboard/dashboard.html"></a>
 </body>
 
 </html>
@@ -55,11 +56,8 @@
 <script>
     function entrar() {
 
-        let email = email_input.value;
-        let senha = senha_input.value;
-
-        let senhaTeste = 'joao123';
-        let emailTeste = 'joao@sptech.school';
+        let emailVar = email_input.value;
+        let senhaVar = senha_input.value;
        
         let emailErro = document.getElementById("email_erro");
         let senhaErro = document.getElementById("senha_erro");
@@ -68,34 +66,72 @@
         emailErro.innerHTML = "";
         senhaErro.innerHTML = "";
 
-        if (email == "" || senha == "") {
-            if (email == "") {
+        if (emailVar == "" || senhaVar == "") {
+            if (emailVar == "") {
                 emailErro.innerHTML = "Preencha o email";
             }
-            if (senha == "") {
+            if (senhaVar == "") {
                 senhaErro.innerHTML = "Preencha a senha";
             }
             return false;
         }
 
 
-        if (email != emailTeste){
-            emailErro.innerHTML = "Email incorreto";
-            return false;
-        }
+        // if (email != emailTeste){
+        //     emailErro.innerHTML = "Email incorreto";
+        //     return false;
+        // }
 
-        else if (senha != senhaTeste) {
-            senhaErro.innerHTML = "Senha incorreta";
-            return false;
-        }
+        // else if (senha != senhaTeste) {
+        //     senhaErro.innerHTML = "Senha incorreta";
+        //     return false;
+        // }
 
-        let loginFeito = senha == senhaTeste && email == emailTeste
+        // let loginFeito = senha == senhaTeste && email == emailTeste
 
-        if(loginFeito){
-            alert("Login realizado com sucesso!");
-            window.location = './Dashboard/dashboard.html'
-        }
+        // if(loginFeito){
+        //     alert("Login realizado com sucesso!");
+        //     window.location = './Dashboard/dashboard.html'
+        // }
        
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(window.location.href = "/Dashboard/dashboard.html", 2000);
+                    
+                });
+
+            } else {
+                senhaErro.innerHTML = 'Credenciais inválidas'
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
             
        
     }

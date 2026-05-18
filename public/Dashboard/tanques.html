@@ -29,15 +29,13 @@
                         <p>Dashboard</p>
                     </div>
                 </a>
-<<<<<<< HEAD
-                <a href="tanques.html">
+                <!-- <a href="tanques.html">
                     <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
                 </a>
-                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
+                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div> -->
                 <!-- <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
                 <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
                 <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div> -->
-=======
 
 
                 <div class="item" onclick="abrirTanques()">
@@ -62,10 +60,12 @@
                 </div>
 
 
-                <div class="item"><img src="./assets/alerta.png" alt="">
-                    <p>Alertas</p>
-                </div>
->>>>>>> 4c4996254f42bb9f8f96cf217afdb68561f89f84
+                <a href="alertas.html">
+                    <div class="item"><img src="./assets/alerta.png" alt="">
+                        <p>Alertas</p>
+                    </div>
+                </a>
+
                 <a href="../index.html">
                     <div class="item"><img src="./assets/porta.png" alt="">
                         <p>Sair</p>
@@ -152,12 +152,12 @@
                         <span>Atualizar Tanque</span>
                     </a>
 
-                     <a href="cadastro-tanque.html" class="botao">
-                       <span>Cadastrar Tanques</span>
+                    <a href="cadastro-tanque.html" class="botao">
+                        <span>Cadastrar Tanques</span>
                     </a>
 
                     <a onclick="excluir()" class="botao">
-                       <span>Excluir Tanque</span>
+                        <span>Excluir Tanque</span>
                     </a>
                 </div>
 
@@ -168,8 +168,8 @@
 
     <script>
 
-        function excluir(){
-            if(confirm('Tem certeza?')){
+        function excluir() {
+            if (confirm('Tem certeza?')) {
                 console.log('deletar')
             } else {
                 console.log('erro')

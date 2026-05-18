@@ -60,24 +60,6 @@ body {
     margin-right: 10px;
 }
 
-<<<<<<< HEAD
-=======
-
-.kpi img{
-    width: 25px;
-}
-
-.sinal{
-    width: 50px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: green;
-    display: flex;
-    justify-content: center;
-}
-
-
->>>>>>> 4c4996254f42bb9f8f96cf217afdb68561f89f84
 /* MAIN */
 .main {
     flex: 1;
@@ -276,7 +258,6 @@ input {
     height: 40px;
     padding: 0 10px;
     color: white;
-<<<<<<< HEAD
     border-radius: 20px;
     background: linear-gradient(to right, #520606 11%, #910000 71%);
     font-weight: 700;
@@ -333,19 +314,10 @@ input {
 
 .corpo_elemento_lista {
     display: flex;
-=======
-}
-
-
-/* SUBMENU TANQUES*/
-.submenu{
-    display: none;
->>>>>>> 4c4996254f42bb9f8f96cf217afdb68561f89f84
     flex-direction: column;
     gap: 10px;
 }
 
-<<<<<<< HEAD
 .corpo_elemento_lista span {
     display: flex;
     align-items: center;
@@ -380,28 +352,4 @@ input {
 .add_tanque span {
     color: #a6a6a6;
     font-weight: bold;
-=======
-.submenu a{
-    width: 100%;
-    padding: 10px 50px;
-    border-radius: 12px;
-
-    background-color: #81151573;
-    color: white;
-    text-decoration: none;
-}
-
-.submenu-item{
-    font-size: 15px;
-    transition: 0.2s;
-}
-
-.submenu-item:hover{
-    opacity: 1;
-    transform: translateX(4px);
-}
-
-.ativo{
-    display: flex;
->>>>>>> 4c4996254f42bb9f8f96cf217afdb68561f89f84
 }
