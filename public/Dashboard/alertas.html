@@ -53,132 +53,14 @@
                         <h1 style="color: #5a0a0a;">Alertas - (Nome da vinicola)</h1>
                         <p>Exibindo <b>4</b> alertas no total.</p>
                     </div>
-                    <select class="filter-select">
-                        <option disabled >Filtrar por:</option>
-                        <option selected>Local</option>
-                        <option>Nível</option>
-                        <option>Nome (crescente)</option>
-                        <option>Nome (descrescente)</option>
+                    <select class="filter-select" id="filter_select" onchange="exibirAlertas(filter_select.value);">
+                        <option disabled>Filtrar por:</option>
+                        <option selected value="1">Nível</option>
+                        <option value="2">Local</option>
                     </select>
                 </div>
             </div>
-            <div class="alerts">
-                <div class="alert-card">
-                    <div class="alert-critical-status-color"></div>
-                    <div class="alert-content">
-                        <div class="alert-summary">
-                            <h3>Alerta - 001</h3>
-                            <h3>Tanque - 001</h3>
-                            <h3>Local - Bloco C</h3>
-                        </div>
-                        <div class="alert-details">
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Nível: Crítico</h3>
-                                </div>
-                                <div class="alert-level-value">
-                                    <h2>80%</h2>
-                                </div>
-                            </div>
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Momento:</h3>
-                                </div>
-                                <div class="alert-time-value">
-                                    <h2>17:53</h2>
-                                    <h2>13/05/2026</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="alert-card">
-                    <div class="alert-critical-status-color"></div>
-                    <div class="alert-content">
-                        <div class="alert-summary">
-                            <h3>Alerta - 002</h3>
-                            <h3>Tanque - 003</h3>
-                            <h3>Local - Bloco B</h3>
-                        </div>
-                        <div class="alert-details">
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Nível: Crítico</h3>
-                                </div>
-                                <div class="alert-level-value">
-                                    <h2>80%</h2>
-                                </div>
-                            </div>
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Momento:</h3>
-                                </div>
-                                <div class="alert-time-value">
-                                    <h2>17:53</h2>
-                                    <h2>13/05/2026</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="alert-card">
-                    <div class="alert-high-status-color"></div>
-                    <div class="alert-content">
-                        <div class="alert-summary">
-                            <h3>Alerta - 003</h3>
-                            <h3>Tanque - 027</h3>
-                            <h3>Local - Bloco A</h3>
-                        </div>
-                        <div class="alert-details">
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Nível: Alto</h3>
-                                </div>
-                                <div class="alert-level-value">
-                                    <h2>60%</h2>
-                                </div>
-                            </div>
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Momento:</h3>
-                                </div>
-                                <div class="alert-time-value">
-                                    <h2>17:53</h2>
-                                    <h2>13/05/2026</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="alert-card">
-                    <div class="alert-high-status-color"></div>
-                    <div class="alert-content">
-                        <div class="alert-summary">
-                            <h3>Alerta - 004</h3>
-                            <h3>Tanque - 006</h3>
-                            <h3>Local - Bloco B</h3>
-                        </div>
-                        <div class="alert-details">
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Nível: Alto</h3>
-                                </div>
-                                <div class="alert-level-value">
-                                    <h2>60%</h2>
-                                </div>
-                            </div>
-                            <div class="alert-level-box">
-                                <div class="alert-level-div">
-                                    <h3>Momento:</h3>
-                                </div>
-                                <div class="alert-time-value">
-                                    <h2>17:53</h2>
-                                    <h2>13/05/2026</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="alerts" id="alerts_div">
             </div>
         </div>
     </div>
@@ -190,3 +72,81 @@
 </body>
 
 </html>
+<script>
+    function exibirAlertas(filter_param) {
+        fetch(`/alertas/buscarAlertasPorIdEmpresa/${sessionStorage.ID_EMPRESA}/${filter_param}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO exibirAlertas()!")
+
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    console.log(json)
+                    alerts_div.innerHTML = "";
+                    for(let i=0;i<json.length;i++) {
+                        alerts_div.innerHTML += `
+                        <div id="alerts_card_${i}" class="alert-card">
+                            <div id="alert_status_color_${i}" class="alert-critical-status-color"></div>
+                            <div class="alert-content">
+                                <div class="alert-summary">
+                                    <h3>Alerta - <span class="black-text" id="div_alert_id_${i}">001</span></h3>
+                                    <h3>Tanque - <span class="black-text" id="div_container_name_${i}">001</span></h3>
+                                    <h3>Local - <span class="black-text" id="div_location_${i}">Bloco C</span></h3>
+                                </div>
+                                <div class="alert-details">
+                                    <div class="alert-level-box">
+                                        <div class="alert-level-div">
+                                            <h3>Nível: <span class="black-text" id="div_alert_level_${i}">Crítico</span></h3>
+                                        </div>
+                                        <div class="alert-level-value">
+                                            <h2><span class="black-text" id="div_alert_value_${i}">80%</span></h2>
+                                        </div>
+                                    </div>
+                                    <div class="alert-level-box">
+                                        <div class="alert-level-div">
+                                            <h3>Momento:</h3>
+                                        </div>
+                                        <div class="alert-time-value">
+                                            <h2><span class="black-text" id="div_alert_time_${i}">17:53</span></h2>
+                                            <h2><span class="black-text" id="div_alert_date_${i}">13/05/2026</span></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                        if(json[i].nivel == "CRITICO") {
+                            document.getElementById(`alert_status_color_${i}`).classList.add("alert-critical-status-color")
+                        } else {
+                            document.getElementById(`alert_status_color_${i}`).classList.add("alert-high-status-color")
+                        }
+
+                        let data = new Date(json[i].data_alerta).toLocaleDateString('pt-BR');
+
+                        document.getElementById(`div_alert_id_${i}`).innerHTML = json[i].id;
+                        document.getElementById(`div_container_name_${i}`).innerHTML = json[i].nome_identificador;
+                        document.getElementById(`div_location_${i}`).innerHTML = json[i].local_tanque;
+                        document.getElementById(`div_alert_level_${i}`).innerHTML = json[i].nivel;
+                        document.getElementById(`div_alert_value_${i}`).innerHTML = json[i].nivel_carbono;
+                        document.getElementById(`div_alert_time_${i}`).innerHTML = json[i].hora_alerta;
+                        document.getElementById(`div_alert_date_${i}`).innerHTML = data;
+                     }
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+    exibirAlertas(filter_select.value);
+</script>
