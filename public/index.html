@@ -133,32 +133,32 @@
     <div class="espaco"></div>
 
     <!-- Formulário de cadastro -->
-<div class="contato">
-    
-    <div class="head2">
-        <h1><span class="sublinhado2">ENTRE EM CONTATO</span><span class="txt_destaque">CONOSCO</span></h1>
-        <h3>Preencha o formulário e nossa equipe entrará em contato coma melhor solução para sua vinícola.</h3>
-    </div>
-    <div class="formularioContato">
-        <div class="campoContato">
-            <span for="empresa">Nome da empresa:</span>
-            <input type="text" id="empresa" placeholder="Digite o nome da empresa">
+    <div class="contato">
+
+        <div class="head2">
+            <h1><span class="sublinhado2">ENTRE EM CONTATO</span><span class="txt_destaque">CONOSCO</span></h1>
+            <h3>Preencha o formulário e nossa equipe entrará em contato coma melhor solução para sua vinícola.</h3>
         </div>
-        <div class="campoContato">
-            <span for="email">E-mail:</span>
-            <input type="email" id="email" placeholder="Digite seu e-mail">
+        <div class="formularioContato">
+            <div class="campoContato">
+                <span for="empresa">Nome da empresa:</span>
+                <input type="text" id="empresa" placeholder="Digite o nome da empresa">
+            </div>
+            <div class="campoContato">
+                <span for="email">E-mail:</span>
+                <input type="email" id="email" placeholder="Digite seu e-mail">
+            </div>
+            <div class="campoContato">
+                <span for="telefone">Telefone para contato:</span>
+                <input type="tel" id="telefone" placeholder="(11) 99999-9999">
+            </div>
         </div>
-        <div class="campoContato">
-            <span for="telefone">Telefone para contato:</span>
-            <input type="tel" id="telefone" placeholder="(11) 99999-9999">
-        </div>
+
+        <button class="btn-contato">Entrar em contato</button>
     </div>
 
-    <button class="btn-contato">Entrar em contato</button>
-</div>
-       
 
-     <div class="espaco"></div>
+    <div class="espaco"></div>
 
 
     <!-- Sobre nós -->
@@ -189,7 +189,28 @@
             <p>SEGURO</p>
         </div>
     </div>
+
+
+    <div id="bobIa_section">
+        <div id="circulo_info" onclick="mostrarChat()">
+            <img src="img/info.png" alt="">
+        </div>
+
+        <div id="chat_bobIa">
+            <div id="head_chat"><span>ControlBot</span>
+                <div id="sair_chat" onclick="fecharChat()">x</div>
+            </div>
+
+            <div id="resposta"></div>
+
+            <div id="enviar_pergunta_section">
+                <input type="text" id="pergunta">
+                <button id="botao_chat" onclick="gerarResposta()">Enviar</button>
+            </div>
+        </div>
     </div>
+
+
 
     <div class="footer">
     </div>
@@ -217,21 +238,54 @@
 
         p_resultado.innerHTML = `
     <p>
-        Com o monitoramento inteligente da fermentação do mosto da CO<sub>2</sub>ntrol sua vinicola pode alcançar uma produção estimada de até <span style="background-color: #00a100; color: white; padding: 1px"><b>${capacidadeTotal.toFixed(2)}L</b></span>, representando um potencial de faturamento bruto de <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal * valorLitro).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo.
+        Com o monitoramento inteligente da fermentação do mosto da CO<sub>2</sub>ntrol sua vinicola pode alcançar uma produção estimada de até <span style="background-color: #00a100; color: white; padding: 1px"><b>${capacidadeTotal.toFixed(2)}L</b></span>, representando um potencial de faturamento bruto de <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal * valorLitro).toLocaleString('pt-BR', { style: "currency", currency: "BRL" })}</b></span> por ciclo.
     </p>
     <p>
-        Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até <span style="background-color: #a00000; color: white; padding: 1px"><b>${(capacidadeTotal - litrosPerdidos * armazenamento).toLocaleString('pt-BR')}L</b></span> com faturamento bruto aproximado de <span style="background-color: #a00000; color: white; padding: 1px"><b>${((capacidadeTotal * valorLitro) - prejuizoVinho).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo.
+        Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até <span style="background-color: #a00000; color: white; padding: 1px"><b>${(capacidadeTotal - litrosPerdidos * armazenamento).toLocaleString('pt-BR')}L</b></span> com faturamento bruto aproximado de <span style="background-color: #a00000; color: white; padding: 1px"><b>${((capacidadeTotal * valorLitro) - prejuizoVinho).toLocaleString('pt-BR', { style: "currency", currency: "BRL" })}</b></span> por ciclo.
     </p>
     <p>
-        Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)).toLocaleString('pt-BR')}L</b></span> por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: <span style="background-color: #00a100; color: white; padding: 1px"><b>${((capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)) * valorLitro).toLocaleString('pt-BR', {style:"currency", currency: "BRL"})}</b></span> por ciclo de produção.
+        Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente <span style="background-color: #00a100; color: white; padding: 1px"><b>${(capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)).toLocaleString('pt-BR')}L</b></span> por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: <span style="background-color: #00a100; color: white; padding: 1px"><b>${((capacidadeTotal - (capacidadeTotal - litrosPerdidos * armazenamento)) * valorLitro).toLocaleString('pt-BR', { style: "currency", currency: "BRL" })}</b></span> por ciclo de produção.
     </p>
 `;
 
-    // Com nosso monitoramento inteligente da fermentação do mosto, sua vinicola pode alcançar uma produção estimada de até (producaoTotal) representando um potencial de faturamento bruto de (producaoTotal * valorVendaLitro) por ciclo.
-    // Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até (producaoTotal - litrosPerdidos) com faturamento bruto aproximado de R$ (producaoTotal - prejuizoFinanceiro) por ciclo.
-    // Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente (producaoTotal - litrosPerdidos) L por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: R$ (producaoTotal*valorVendaLitro - prejuizoFinanceiro) por ciclo de produção.
+        // Com nosso monitoramento inteligente da fermentação do mosto, sua vinicola pode alcançar uma produção estimada de até (producaoTotal) representando um potencial de faturamento bruto de (producaoTotal * valorVendaLitro) por ciclo.
+        // Considerando um cenário sem monitoramento da fermentação, a produção média estimada seria de até (producaoTotal - litrosPerdidos) com faturamento bruto aproximado de R$ (producaoTotal - prejuizoFinanceiro) por ciclo.
+        // Com a otimização do período da fermentação do mosto, sua produção pode aumentar em aproximadamente (producaoTotal - litrosPerdidos) L por ciclo, ou seja, com o monitoramento inteligente dos tanques, você pode aumentar seu faturamento bruto em até: R$ (producaoTotal*valorVendaLitro - prejuizoFinanceiro) por ciclo de produção.
 
-    // TODOS esses dados são estimados pela EMBRAPA.
-    // O preço do kg do tomate pode variar de acordo com a região e a época do ano, mas para fins de análise, utilizamos o valor inserido pelo produtor.
+        // TODOS esses dados são estimados pela EMBRAPA.
+        // O preço do kg do tomate pode variar de acordo com a região e a época do ano, mas para fins de análise, utilizamos o valor inserido pelo produtor.
+    }
+
+    function mostrarChat() {
+        chat_bobIa.style.display = "flex";
+        circulo_info.style.display = "none";
+    }
+
+    function fecharChat() {
+        chat_bobIa.style.display = "none";
+        circulo_info.style.display = "flex";
+    }
+
+
+    // BOBIA
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta').value;
+
+        resposta.innerHTML += `<div class="pergunta_user">${pergunta}</div>`;
+        
+
+        const response = await fetch('http://localhost:3000/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
+
+        const data = await response.json();
+
+        // resposta.style.display = 'block';
+        // document.getElementById('resposta').innerText = data.resultado;
+        resposta.innerHTML += `<div class="resposta_chat">${data.resultado}</div>`;
     }
 </script>
