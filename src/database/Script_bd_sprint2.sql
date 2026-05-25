@@ -181,6 +181,7 @@ SELECT SUM(situacao) AS ativos, COUNT(id) AS total FROM sensor;
 -- Consulta que mostra a quantidade de armazenamentos ativos, comparado ao total
 SELECT SUM(utilizacao) AS ativos, COUNT(id) AS total FROM armazenamento;
 
+
 CREATE VIEW vw_dashboard
 AS
 SELECT 

@@ -257,6 +257,11 @@
     buscarGraficoLinha();
     buscarGraficoMeiaLua();
 
+        setInterval(() => {
+            buscarGraficoLinha();
+            buscarGraficoMeiaLua();
+        }, 2000);
+
 
 
     function buscarGraficoLinha() {
@@ -289,6 +294,8 @@
             });
     }
 
+
+    
     function buscarGraficoMeiaLua() {
 
         fetch(`/tanques/buscarGrafico2/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
@@ -330,7 +337,14 @@
 
     function criarGraficoLinha(nomes, valores) {
 
-        new Chart(document.getElementById('chart1'), {
+        if (graficoLinha) {
+            graficoLinha.data.labels = nomes;
+            graficoLinha.data.datasets[0].data = valores;
+            graficoLinha.update();
+            return;
+        }
+
+        graficoLinha = new Chart(document.getElementById('chart1'), {
             type: 'line',
             data: {
                 labels: nomes,
@@ -387,9 +401,16 @@
     }
 
 
+
     function criarGraficoMeiaLua(co2Atual, restante) {
 
-        new Chart(document.getElementById('chart2'), {
+        if (graficoMeiaLua) {
+            graficoMeiaLua.data.datasets[1].data = [co2Atual, restante];
+            graficoMeiaLua.update();
+            return;
+        }
+
+        graficoMeiaLua = new Chart(document.getElementById('chart2'), {
             type: 'doughnut',
             data: {
                 labels: ['Nível atual de CO2', 'Máximo'],
@@ -427,9 +448,8 @@
                 }
             }
         });
+
     }
-
-
 
 
 </script>
