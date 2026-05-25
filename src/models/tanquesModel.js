@@ -148,7 +148,6 @@ function excluirTanque(idArmazenamento) {
 }
 
 
-
 module.exports = {
     atualizarTanque,
     buscarGrafico1,

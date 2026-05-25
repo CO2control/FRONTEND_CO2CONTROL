@@ -79,6 +79,7 @@ function excluirTanque(req, res){
     });
 }
 
+
 module.exports = {
     buscarGrafico1,
     buscarGrafico2,
