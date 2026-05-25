@@ -19,6 +19,8 @@ function executar(instrucao) {
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
+        conexao.query("SET autocommit = 1");
+        
         conexao.query(instrucao, function (erro, resultados) {
             conexao.end();
             if (erro) {

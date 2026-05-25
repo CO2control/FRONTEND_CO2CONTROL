@@ -27,7 +27,7 @@
 
 <div>
     <div class="inputs-cadastro">
-        <span>Nome do Identificador</span>
+        <span>Novo Nome</span>
         <input type="text" id="ipt_nomeIdentificador">
 
         <span>Localização do Tanque</span>
@@ -41,7 +41,7 @@
         </select>
     </div>
 
-    <button type="submit" class="botao-salvar">
+    <button onclick="atualizarTanque()" class="botao-salvar">
         Salvar Registro
     </button>
     
@@ -50,3 +50,52 @@
 
 </body>
 </html>
+<script>
+
+function atualizarTanque(){
+
+    let nome = document.getElementById("ipt_nomeIdentificador").value;
+    let localizacao = document.getElementById("ipt_local").value;
+    let utilizacao = document.getElementById("utilizacao").value;
+
+
+    if(nome == '' || localizacao == ''){
+        alert("Preencha todos os campos")
+        return;
+    }
+
+    fetch(`/tanques/atualizarTanque/${sessionStorage.ID_EMPRESA}`,{
+
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                nomeServer: nome,
+                localServer: localizacao,
+                utilizacaoServer: utilizacao,
+                idArmazenamentoServer: sessionStorage.ID_ARMAZENAMENTO
+            })
+        })
+        .then(function (resposta) {
+
+            console.log("Resposta:", resposta);
+
+            if (resposta.ok) {
+                alert("Tanque atualizado com sucesso");
+                setTimeout(() => {
+                    window.location.href = "tanques.html";
+                }, 1000);
+            } else {
+                alert ("Erro ao atualizar tanque");
+            }
+        })
+        .catch(function (erro) {
+            console.log(`erro`);
+        });
+
+}
+
+
+</script>
