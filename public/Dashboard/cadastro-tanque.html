@@ -14,7 +14,7 @@
 <body>
 
 <div class="sair">
-    <a href="tanques.html">
+    <a href="dashboard.html">
         <button>EXIT</button>
     </a>
 </div>
@@ -53,7 +53,7 @@
         </select>
     </div>
 
-    <button type="submit" class="botao-salvar">
+    <button type="submit" class="botao-salvar" onclick="addTanque()">
         Salvar Registro
     </button>
 
@@ -61,3 +61,48 @@
 
 </body>
 </html>
+<script>
+    function addTanque() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        let nome = ipt_nomeIdentificador.value;
+        let local = ipt_local.value;
+        let tipo = tipo.value;
+        let capacidade = ipt_capacidade.value;
+        let status = utilizacao.value 
+
+             fetch(`/geral/addTanque/${idEmpresa}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+        nomeServer: nome,
+        localServer: local,
+        tipoServer: tipo,
+        capacidadeServer: capacidade,
+        statusServer: status
+        }),
+      })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        
+        if (resposta.ok) {
+
+          alert("Seu tanque foi cadastrado com sucesso!");
+          window.location = "dashboard.html"
+
+        } else {
+          throw "Houve um erro na api";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+      
+      
+      
+    }
+
+    
+</script>

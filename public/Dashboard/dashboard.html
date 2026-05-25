@@ -7,7 +7,7 @@
     <title>Dashboard CO2</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../Dashboard/css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -28,26 +28,7 @@
                 </a>
 
 
-                <div class="item" onclick="abrirTanques()">
-                    <img src="./assets/tanque.png" alt="">
-                    <p>Tanques</p>
-                </div>
-
-                <div class="submenu" id="submenuTanques">
-
-                    <a href="tanques.html">
-                        <div class="submenu-item">Tanque 1</div>
-                    </a>
-
-                    <a href="">
-                        <div class="submenu-item">Tanque 2</div>
-                    </a>
-
-                    <a href="">
-                        <div class="submenu-item">Tanque 3</div>
-                    </a>
-
-                </div>
+                
                 
                 <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
                 <a href="../index.html">
@@ -65,7 +46,7 @@
             <div class="kpis">
                 <div class="kpi kpi-verde">
                     <div class="kpi-title"><span>Sensores Ativos</span></div>
-                    <div class="kpi-value"><span>12/15</span></div>
+                    <div class="kpi-value" id="sensorMostrar"></div>
                     <img src="./assets/wi-fi.png" alt="">
                 </div>
                 <div class="kpi kpi-amarela">
@@ -81,7 +62,7 @@
 
                 <div class="kpi">
                     <div class="kpi-title"><span>Alertas Hoje</span></div>
-                    <div class="kpi-value"><span>3</span></div>
+                    <div class="kpi-value" id="sensorAlerta"></div>
                     <img src="./assets/alarme.png" alt="">
                 </div>
             </div>
@@ -95,7 +76,7 @@
                         <div class="titulo-wrapper">
                             <img class="tempoReal" src="simboloVerde.png" alt="">
                             <h2 id="head_lista">Todos os tanques</h2>
-                            <button class="button3">CADASTRAR TANQUE</button>
+                            <a href="cadastro-tanque.html"><button class="button3">CADASTRAR TANQUE</button></a>
                         </div>
                         
                         <div class="controles-wrapper">
@@ -111,8 +92,12 @@
                             
                         </div>
                     </div>
+                    <div id="div_cards" class="tanques_lista">
+                         <!-- <div id="div_cards"></div> -->
+                    </div>
+                   
 
-                    <div class="tanques_lista">
+                    <!-- <div class="tanques_lista">
                         <div class="elemento_lista">
                             <div class="head_elemento_lista">
                                 <div class="etiqueta_vermelho"></div>
@@ -123,9 +108,9 @@
                                 <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco A</span>
                                 <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 02/02/1981</span>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="elemento_lista">
+                        <!-- <div class="elemento_lista">
                             <div class="head_elemento_lista">
                                 <div class="etiqueta_verde"></div>
                                 Tanque A02
@@ -190,7 +175,7 @@
                                 <span>Cadastre seu tanque!</span>
                             </span>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -210,86 +195,160 @@
     </div>
     <script>
 
-        function abrirTanques() {
+        window.onload = () => {
+            kpiSensor()
+            kpiAlerta()
+            mostrarCards()
+    }
 
-            let submenuNovo = document.getElementById("submenuTanques");
+    function kpiSensor() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+        fetch(`/geral/sensores/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) { 
+                resposta.json().then((dados) => {
+                    sensorMostrar.innerHTML = `${dados[0].sensores_ativos}/${dados[0].total_sensores}`
+                })
+            }
+        })
+    }
 
-            if (submenuNovo.className == "submenu") {
-                submenuNovo.className = "submenu ativo";
+    function kpiAlerta() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+        fetch(`/geral/alertas/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) { 
+                resposta.json().then((dados) => {
+                    sensorAlerta.innerHTML = `${dados[0].alertas_hoje}`
+                })
+            }
+        })
+    }
+
+    function mostrarCards() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        fetch(`/geral/cards/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) {
+                
+                resposta.json().then(function (dados) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
+                    for(let i = 0; i < dados.length; i++){
+                        let estilo 
+                    //  if(dados[i].nivel > 5){
+                    //         estilo = etiqueta_vermelho
+                    //     }else if(){
+                    //         estilo =
+                    //     }else{
+                    //         estilo = etiqueta_verde
+                    //     }
+                        div_cards.innerHTML += `
+                            <div class="elemento_lista">
+                            <div class="head_elemento_lista">
+                                <div class="etiqueta_vermelho"></div>
+                                ${dados[i].tanque}
+                            </div>
+                            <div class="corpo_elemento_lista">
+                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span>${dados[i].nivel}</span>
+                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span>${dados[i].localizacao}</span>
+                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span>${dados[i].ultimo_alerta}</span>
+                            </div>
+                        `;
+
+                    }
+                
+
+                });
             } else {
-                submenuNovo.className = "submenu";
+                console.error('Nenhum dado encontrado ou erro na API');
             }
-        }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    
+
+    }
+
+        // function abrirTanques() {
+
+        //     let submenuNovo = document.getElementById("submenuTanques");
+
+        //     if (submenuNovo.className == "submenu") {
+        //         submenuNovo.className = "submenu ativo";
+        //     } else {
+        //         submenuNovo.className = "submenu";
+        //     }
+        // }
 
 
-        Chart.defaults.color = '#ffffff';
+        // Chart.defaults.color = '#ffffff';
 
-        new Chart(document.getElementById('chart2'), {
-            type: 'bar',
-            data: {
-                labels: ['', 'T1', 'T2', 'T3', 'T4', 'T5', ''],
-                datasets: [
-                    {
-                        label: 'CO2 por Tanque',
-                        data: [null, 30, 40, 15, 60, 50, null],
-                        backgroundColor: 'rgb(114, 47, 55)',
-                        borderColor: 'white',
-                        borderWidth: 2,
-                        borderRadius: 5,
-                        order: 2,
-                        barPercentage: 0.5,
-                        categoryPercentage: 0.5
-                    },
-                    {
-                        label: 'Mínimo Ideal',
-                        data: [20, 20, 20, 20, 20, 20, 20],
-                        borderColor: 'green',
-                        borderWidth: 2,
-                        type: 'line',
-                        pointRadius: 0,
-                        fill: false,
-                        order: 1
-                    },
-                    {
-                        label: 'Faixa Ideal',
-                        data: [40, 40, 40, 40, 40, 40, 40],
-                        borderColor: 'green',
-                        borderWidth: 2,
-                        type: 'line',
-                        pointRadius: 0,
-                        fill: '-1',
-                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
-                        order: 1
-                    }
+        // new Chart(document.getElementById('chart2'), {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ['', 'T1', 'T2', 'T3', 'T4', 'T5', ''],
+        //         datasets: [
+        //             {
+        //                 label: 'CO2 por Tanque',
+        //                 data: [null, 30, 40, 15, 60, 50, null],
+        //                 backgroundColor: 'rgb(114, 47, 55)',
+        //                 borderColor: 'white',
+        //                 borderWidth: 2,
+        //                 borderRadius: 5,
+        //                 order: 2,
+        //                 barPercentage: 0.5,
+        //                 categoryPercentage: 0.5
+        //             },
+        //             {
+        //                 label: 'Mínimo Ideal',
+        //                 data: [20, 20, 20, 20, 20, 20, 20],
+        //                 borderColor: 'green',
+        //                 borderWidth: 2,
+        //                 type: 'line',
+        //                 pointRadius: 0,
+        //                 fill: false,
+        //                 order: 1
+        //             },
+        //             {
+        //                 label: 'Faixa Ideal',
+        //                 data: [40, 40, 40, 40, 40, 40, 40],
+        //                 borderColor: 'green',
+        //                 borderWidth: 2,
+        //                 type: 'line',
+        //                 pointRadius: 0,
+        //                 fill: '-1',
+        //                 backgroundColor: 'rgba(0, 255, 0, 0.1)',
+        //                 order: 1
+        //             }
 
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        offset: true,
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            // Isso evita que apareça o vazio na legenda do eixo X que ta la no label
-                            callback: function (val, index) {
-                                return this.getLabelForValue(val);
-                            }
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            color: 'rgba(255,255,255,0.1)'
-                        }
-                    }
-                }
-            }
-        });
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         maintainAspectRatio: false,
+        //         scales: {
+        //             x: {
+        //                 offset: true,
+        //                 grid: {
+        //                     display: false
+        //                 },
+        //                 ticks: {
+        //                     // Isso evita que apareça o vazio na legenda do eixo X que ta la no label
+        //                     callback: function (val, index) {
+        //                         return this.getLabelForValue(val);
+        //                     }
+        //                 }
+        //             },
+        //             y: {
+        //                 beginAtZero: true,
+        //                 max: 100,
+        //                 grid: {
+        //                     color: 'rgba(255,255,255,0.1)'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
 
 
     </script>

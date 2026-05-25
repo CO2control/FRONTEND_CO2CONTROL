@@ -276,13 +276,15 @@ input {
     padding: 20px;
     flex: 1;
     overflow-y: auto;
+    grid-template-columns: repeat (3, 1f);
 }
 
 .elemento_lista {
     display: flex;
     flex-direction: column;
-    width: 250px;
-    height: 170px;
+    width: 200px;
+    padding: 20px;
+    height: 150px;
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
