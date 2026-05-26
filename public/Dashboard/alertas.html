@@ -18,40 +18,33 @@
 
         <!-- SIDEBAR -->
         <div class="sidebar">
-
             <div class="logo">
-                <img src="./assets/logo.png" alt="">
+                <img src="./assets/logo.png" alt="Logo">
             </div>
 
             <div class="menu">
                 <a href="dashboard.html">
-                    <div class="item"><img src="./assets/iconNav.png" alt=""><span>Visão geral</span></div>
+                    <div class="item"><img src="./assets/iconNav.png" alt="">
+                        <p>Dashboard</p>
+                    </div>
                 </a>
-                <a href="tanques.html">
-                    <div class="item"><img src="./assets/tanque.png" alt=""><span>Tanques</span></div>
-                </a>
-                <a href="#">
-                    <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
-                </a>
-                <!-- <div class="item"><img src="./assets/relatorio.png" alt=""><span>Relatórios</span></div>
-                <div class="item"><img src="./assets/historia.png" alt=""><span>Histórico</span></div>
-                <div class="item"><img src="./assets/Settings.png" alt=""><span>Configurações</span></div> -->
+                
+                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
                 <a href="../index.html">
-                    <div class="item"><img src="./assets/porta.png" alt=""><span>Sair</span></div>
+                    <div class="item">
+                        <img src="./assets/porta.png" alt="">
+                        <p>Sair</p>
+                    </div>
                 </a>
             </div>
-
-
-
         </div>
-
         <!-- MAIN -->
         <div class="main">
             <div class="main-header">
                 <div class="alerts-header">
                     <div>
-                        <h1 style="color: #5a0a0a;">Alertas - (Nome da vinicola)</h1>
-                        <p>Exibindo <b>4</b> alertas no total.</p>
+                        <h1 style="color: #5a0a0a;">Alertas - <span class="red-text" id="empresa_name">(Nome da vinicola)</span></h1>
+                        <p>Exibindo <span class="black-text" id="alert_count"><b>4</b></span> alertas no total.</p>
                     </div>
                     <select class="filter-select" id="filter_select" onchange="exibirAlertas(filter_select.value);">
                         <option disabled>Filtrar por:</option>
@@ -64,13 +57,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        
-    </script>
-
 </body>
-
 </html>
 <script>
     function exibirAlertas(filter_param) {
@@ -86,6 +73,8 @@
                 resposta.json().then(json => {
                     console.log(json)
                     alerts_div.innerHTML = "";
+                    empresa_name.innerHTML = json[0].razao_social;
+                    alert_count.innerHTML = json.length;
                     for(let i=0;i<json.length;i++) {
                         alerts_div.innerHTML += `
                         <div id="alerts_card_${i}" class="alert-card">

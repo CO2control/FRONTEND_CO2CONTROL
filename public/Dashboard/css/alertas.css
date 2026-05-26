@@ -85,6 +85,7 @@ h2 {
 
 a {
     text-decoration: none;
+    color: white;
 }
 
 span {
@@ -157,6 +158,10 @@ span {
 
 .black-text {
     color: black;
+}
+
+.red-text {
+    color: #5a0a0a;
 }
 
 .alert-summary {

@@ -3,7 +3,7 @@ var database = require("../database/config")
 function buscarAlertasPorIdEmpresa(id_empresa, filter_param) {
     let instrucaoSql = `
         SELECT 
-            a.id, ar.nome_identificador, ar.local_tanque, a.nivel, DATE(a.data_alerta) as data_alerta, TIME(a.data_alerta) as hora_alerta, ls.nivel_carbono
+            a.id, ar.nome_identificador, ar.local_tanque, a.nivel, DATE(a.data_alerta) as data_alerta, TIME(a.data_alerta) as hora_alerta, ls.nivel_carbono, e.razao_social
         FROM
             alerta a
                 JOIN
