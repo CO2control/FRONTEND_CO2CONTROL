@@ -37,6 +37,7 @@ CREATE TABLE endereco (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_empresa INT NOT NULL,
     cep CHAR(8) NOT NULL,
+
     logradouro VARCHAR(100) NOT NULL,
     numero INT,
     complemento VARCHAR(100),
