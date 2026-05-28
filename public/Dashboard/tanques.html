@@ -42,7 +42,7 @@
 
             <div class="kpi sombra-preta">
                 <div class="kpi-title"><span>Tanque</span></div>
-                <div class="kpi-value">
+                <div class="kpi-value1">
                     <span id="kpiNome"></span>
                 </div>
                 <img src="./assets/wi-fi.png">
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="kpi" id="kpiCorTendencia">
+            <div class="kpi sombra-amarela" >
                 <div class="kpi-title"><span>Tendência atual</span></div>
                 <img id="imgTendencia" alt="Tendência">
                 <div class="kpi-value">
@@ -158,7 +158,9 @@
 
 
 
-    fetch(`/tanques/buscarKPIs/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+    function buscarKPIs(){
+
+        fetch(`/tanques/buscarKPIs/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
 
         .then(function (resposta) {
             return resposta.json();
@@ -180,17 +182,20 @@
 
 
             let corKpiMaximo = document.getElementById("kpiMaximo");
+            corKpiMaximo.classList.remove("sombra-verde", "sombra-vermelha");
+
             if (dados[0].maximo < 20 || dados[0].maximo > 40) {
                 corKpiMaximo.classList.add("sombra-vermelha")
             } else {
                 corKpiMaximo.classList.add("sombra-verde")
             }
 
-
             let horaMaximo = new Date(dados[0].data_maximo);
 
             document.getElementById("ultimaMedicao").innerHTML = ` Dia ${horaMaximo.toLocaleDateString('pt-BR')} `;
             document.getElementById("ultimaMedicao").innerHTML += ` ás ${horaMaximo.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}h `;
+
+
 
             if (dados[0].ultimo_alerta) {
 
@@ -200,8 +205,9 @@
                     `Último alerta ás ${horaAlerta.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}h`;
             }
 
-
             let corKpiAlerta = document.getElementById("kpiCorAlerta");
+            corKpiAlerta.classList.remove("sombra-verde", "sombra-amarela", "sombra-vermelha");
+            
             if (dados[0].alertas == 0) {
                 corKpiAlerta.classList.add("sombra-verde")
             } else if (dados[0].alertas <= 2) {
@@ -212,9 +218,13 @@
 
         });
 
+    }
 
+    
 
-    fetch(`/tanques/buscarTendencia/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+    function buscarTendencia(){
+
+        fetch(`/tanques/buscarTendencia/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
         .then(function (resposta) {
             return resposta.json();
         })
@@ -230,35 +240,38 @@
             let anterior = Number(dados[1].nivel_carbono);
             let tendencia = '';
             let imagemTendencia = document.getElementById("imgTendencia");
-            let corKpiTendencia = document.getElementById("kpiCorTendencia");
 
 
             if (atual > anterior) {
                 tendencia = "Aumentar";
                 imagemTendencia.src = "./assets/seta-para-cima.png"
-                corKpiTendencia.classList.add("sombra-amarela")
             }
             else if (atual < anterior) {
                 tendencia = "Diminuir";
                 imagemTendencia.src = "./assets/seta-para-baixo.png"
-                corKpiTendencia.classList.add("sombra-amarela")
             }
             else {
                 tendencia = "Estável";
                 imagemTendencia.src = "./assets/seta-estavel.png"
-                corKpiTendencia.classList.add("sombra-verde")
             }
 
             kpiTendencia.innerHTML = tendencia;
 
         });
+    }
+
+    
 
     buscarGraficoLinha();
     buscarGraficoMeiaLua();
+    buscarKPIs();
+    buscarTendencia();
 
         setInterval(() => {
             buscarGraficoLinha();
             buscarGraficoMeiaLua();
+            buscarKPIs();
+            buscarTendencia();
         }, 2000);
 
 
@@ -424,7 +437,7 @@
                     rotation: 306
                 }, {
                     data: [co2Atual, restante], // PRIMEIRO PARAMETRO: NIVEL EM (%), SEGUNDO: 100 - NÍVEL (AMBOS EM PORCENTAGEM)
-                    backgroundColor: ['#520606', '#e9e4e4'],
+                    backgroundColor: ['red', '#e9e4e4'],
                     borderWidth: 0,
                     circumference: 180,
                     rotation: 270

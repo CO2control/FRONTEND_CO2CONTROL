@@ -129,10 +129,18 @@ body {
     font-weight: bold;
 }
 
+
 .kpi-value {
     font-size: 22px;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.kpi-value1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    justify-content: centera;
 }
 
 .kpi-hora{
