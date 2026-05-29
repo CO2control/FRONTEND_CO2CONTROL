@@ -22,7 +22,7 @@ function buscarAlertas(idEmpresa) {
     var instrucaoSql = `select
             count(al.id) as alertas_hoje
         from alerta al
-        join sensor s 
+        join sensor s
             on al.fk_sensor = s.id
         join armazenamento a 
             on s.fk_armazenamento = a.id
@@ -42,19 +42,19 @@ function buscarCards(idEmpresa) {
     l.nivel_carbono AS nivel,
     a.local_tanque AS localizacao,
     date_format(MAX(al.data_alerta), '%d/%m/%Y %H:%i') AS ultimo_alerta
-FROM armazenamento a
-JOIN sensor s 
-    ON s.fk_armazenamento = a.id
-LEFT JOIN leitura_sensor l 
-    ON l.fk_sensor = s.id
-LEFT JOIN alerta al 
-    ON al.fk_sensor = s.id
-WHERE a.fk_empresa = ${idEmpresa}
-GROUP BY 
-    a.id,
-    a.nome_identificador,
-    l.nivel_carbono,
-    a.local_tanque;`;
+    FROM armazenamento a
+    JOIN sensor s 
+        ON s.fk_armazenamento = a.id
+    LEFT JOIN leitura_sensor l 
+        ON l.fk_sensor = s.id
+    LEFT JOIN alerta al 
+        ON al.fk_sensor = s.id
+    WHERE a.fk_empresa = ${idEmpresa}
+    GROUP BY 
+        a.id,
+        a.nome_identificador,
+        l.nivel_carbono,
+        a.local_tanque;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

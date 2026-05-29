@@ -234,17 +234,17 @@
                     console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
                     for(let i = 0; i < dados.length; i++){
                         let estilo 
-                    //  if(dados[i].nivel > 5){
-                    //         estilo = etiqueta_vermelho
-                    //     }else if(){
-                    //         estilo =
-                    //     }else{
-                    //         estilo = etiqueta_verde
-                    //     }
-                        div_cards.innerHTML += `
+                     if(dados[i].nivel > 60){
+                            estilo = "etiqueta_vermelho"
+                        }else if(dados[i].nivel < 20){
+                            estilo = "etiqueta_amarelo";
+                        }else{
+                            estilo = "etiqueta_verde";
+                        }
+                        div_cards.innerHTML +=`
                             <div class="elemento_lista">
                             <div class="head_elemento_lista">
-                                <div class="etiqueta_vermelho"></div>
+                                <div class="${estilo}"></div>
                                 ${dados[i].tanque}
                             </div>
                             <div class="corpo_elemento_lista">
