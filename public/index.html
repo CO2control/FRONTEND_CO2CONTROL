@@ -191,29 +191,18 @@
     </div>
 
 
-    <div id="bobIa_section">
-        <div id="circulo_info" onclick="mostrarChat()">
-            <img src="img/info.png" alt="">
-        </div>
-
-        <div id="chat_bobIa">
-            <div id="head_chat"><span>ControlBot</span>
-                <div id="sair_chat" onclick="fecharChat()">x</div>
+    <div id="help_section">
+        <a href="https://sptech-team-j3dwrfgb.atlassian.net/jira/software/form/ec44a4aa-c04a-4566-acc1-1de241fb219e?atlOrigin=eyJpIjoiMDNhYWI2YmZjOWY0NGY2OGIzZTgwZGJjMDhmMzg4ZDUiLCJwIjoiaiJ9"
+            target="_blank">
+            <div id="circulo_info">
+                <img src="img/suporte.png" alt="">
             </div>
-
-            <div id="resposta"></div>
-
-            <div id="enviar_pergunta_section">
-                <input type="text" id="pergunta">
-                <button id="botao_chat" onclick="gerarResposta()">Enviar</button>
-            </div>
-        </div>
+        </a>
     </div>
 
 
 
     <div class="footer">
-        <a href="https://sptech-team-j3dwrfgb.atlassian.net/jira/software/form/ec44a4aa-c04a-4566-acc1-1de241fb219e?atlOrigin=eyJpIjoiMDNhYWI2YmZjOWY0NGY2OGIzZTgwZGJjMDhmMzg4ZDUiLCJwIjoiaiJ9" target="_blank">Falar com o Suporte</a>
     </div>
 </body>
 
@@ -257,36 +246,4 @@
         // O preço do kg do tomate pode variar de acordo com a região e a época do ano, mas para fins de análise, utilizamos o valor inserido pelo produtor.
     }
 
-    function mostrarChat() {
-        chat_bobIa.style.display = "flex";
-        circulo_info.style.display = "none";
-    }
-
-    function fecharChat() {
-        chat_bobIa.style.display = "none";
-        circulo_info.style.display = "flex";
-    }
-
-
-    // BOBIA
-    async function gerarResposta() {
-        const pergunta = document.getElementById('pergunta').value;
-
-        resposta.innerHTML += `<div class="pergunta_user">${pergunta}</div>`;
-        
-
-        const response = await fetch('http://localhost:3000/perguntar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ pergunta })
-        });
-
-        const data = await response.json();
-
-        // resposta.style.display = 'block';
-        // document.getElementById('resposta').innerText = data.resultado;
-        resposta.innerHTML += `<div class="resposta_chat">${data.resultado}</div>`;
-    }
 </script>
