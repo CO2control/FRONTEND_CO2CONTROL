@@ -10,93 +10,56 @@ body {
 
 }
 
-.container {
-    display: flex;
-    height: 110vh;
-}
 
-
-.sidebar {
-    width: 220px;
-    background-color: #5a0a0a;
-    padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.logo img {
-    width: 70%;
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-
-.submenu{
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.submenu a{
+.superior{
     width: 100%;
-    padding: 10px 50px;
-    border-radius: 12px;
+    height: 60px;
+    background-color: rgba(226, 211, 211, 0.808);
+}
 
-    background-color: #81151573;
-    color: white;
+
+.botao-tanque{
+    display: flex;
+    gap: 15px;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.botao-tanque a{
     text-decoration: none;
 }
 
-.submenu-item{
-    font-size: 15px;
-    transition: 0.2s;
-}
-
-.submenu-item:hover{
-    opacity: 1;
-    transform: translateX(4px);
-}
-
-.ativo{
+.botao-sair{
     display: flex;
+    justify-content: start;
+    margin-left: 20px;
+    margin-top: -45px;
 }
 
-.item {
+.botao-sair a{
+    text-decoration: none;
+}
+
+.botoes span{
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 5px;
+    justify-content: center;
+
+    margin-top: 12px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    background: linear-gradient(#520606 25%, #790202 70%);
+    color: rgb(255, 255, 255);
+
     cursor: pointer;
-    transition: 0.2s;
-    color: white;
+    transition: 0.4s;
 }
 
-a {
-    text-decoration: none;
-}
 
-.item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.item > img {
-    width: 30px;
-    margin-right: 10px;
-}
-
-.item img {
-    width: 30px;
+.botoes:hover{
+    transform: translateY(-1px);
 }
 
 
@@ -124,6 +87,7 @@ a {
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
     background: linear-gradient(135deg, #ffffff, #ffffff);
@@ -136,20 +100,24 @@ a {
     font-size: 12px;
 }
 
-.sombra1{
+.sombra-preta{
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.479);
+    border: 1px solid #000000
 }
 
-.sombra2{
-    box-shadow: 0px 6px 15px rgba(190, 56, 56, 0.849);
+.sombra-vermelha{
+    box-shadow: 0px 6px 15px #a31515;
+    border: 1px solid #a31515
 }
 
-.sombra3{
-    box-shadow: 0px 6px 15px rgba(238, 206, 27, 0.904);
+.sombra-amarela{
+    box-shadow: 0px 6px 15px #cfc50a;
+    border: 1px solid #cfc50a
 }
 
-.sombra4{
-    box-shadow: 0px 6px 15px rgba(190, 56, 56, 0.849);
+.sombra-verde{
+    box-shadow: 0px 6px 15px #1abc3a;;
+    border: 1px solid #1abc3a;
 }
 
 .kpi:hover {
@@ -157,16 +125,32 @@ a {
 }
 
 .kpi-title {
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
+
 .kpi-value {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
+    margin-top: 10px;
+}
+
+.kpi-value1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    justify-content: centera;
+}
+
+.kpi-hora{
+    font-size: 15px;
+    margin-top: 10px;
 }
 
 .kpi img {
     width: 35px;
+    margin-top: 10px;
 }
 
 span {
@@ -212,11 +196,11 @@ span {
     border-radius: 12px;
     height: 320px;
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.432);
+    border: solid 2px #520606;
 }
 
 .chart-dois {
     flex: 1;
-    /* Ocupa 25% da largura */
     background: linear-gradient(135deg, #ffffff, #ffffff);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.479);
     padding: 30px;
@@ -225,6 +209,7 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: solid 2px #520606;
 }
 
 
@@ -258,42 +243,7 @@ span {
 } */
 
 
-.final{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 
 
-.botoes{
-    display: flex;
-    gap: 25px;
-}
-
-.botao span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 25px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: bold;
-
-    background: linear-gradient(135deg, #dbc1c1);
-    color: rgb(0, 0, 0);
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
-
-    cursor: pointer;
-    transition: 0.3s;
-}
 
 
-.botao:hover{
-    transform: translateY(-2px);
-    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.4);
-}
-
-.botao:active{
-    transform: scale(0.97);
-}

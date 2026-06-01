@@ -40,7 +40,6 @@
             </div>
         </div>
 
-        <!-- MAIN -->
         <div class="main">
             <!-- KPIs -->
             <div class="kpis">
@@ -51,15 +50,15 @@
                 </div>
                 <div class="kpi kpi-amarela">
                     <div class="kpi-title"><span>Tanques em Alertas</span></div>
-                    <div class="kpi-value"><span>3</span></div>
+                    <div class="kpi-value" id="tanqueAlerta"></div>
                     <img src="./assets/alertaColor.png" alt="">
                 </div>
                 <div class="kpi kpi-vermelha">
                     <div class="kpi-title"><span>Tanque com Maior Variação</span></div>
-                    <div class="kpi-value"><span>T007</span></div>
+                    <div class="kpi-value" id="variacao"></div>
                     <img src="./assets/armazenamentoIndivdual.png" alt="">
                 </div>
-
+                
                 <div class="kpi">
                     <div class="kpi-title"><span>Alertas Hoje</span></div>
                     <div class="kpi-value" id="sensorAlerta"></div>
@@ -67,11 +66,9 @@
                 </div>
             </div>
 
-            <!-- CONTEÚDO -->
+
             <div class="content">
-                <!-- LISTA -->
                 <div id="lista">
-                    <!-- Agrupamos o topo e os controles para usar Flexbox -->
                     <div class="lista-header">
                         <div class="titulo-wrapper">
                             <img class="tempoReal" src="simboloVerde.png" alt="">
@@ -81,124 +78,42 @@
                         
                         <div class="controles-wrapper">
                             <input type="text" id="ipt_pesq" placeholder="Digite o nome do seu tanque">
-                            <button class="button1">PESQUISAR</button>
-                            <select id="ipt_nota" class="button2">
+                            <button class="button1" onclick="pesquisarNome()">PESQUISAR</button>
+                            <select id="ipt_filtro" class="button2" onchange="filtrarTanques()"> 
+                                <!-- onchange chama a função automaticamente -->
                                 <option value="x">FILTRAR</option>
-                                <option value="5">Alerta</option>
-                                <option value="4">Crítico</option>
                                 <option value="3">Bom</option>
-                                <option value="2">Recentes</option>
+                                <option value="4">Abaixo</option>
+                                <option value="5">Alto</option>
+                                <option value="6">Crítico</option>
                             </select>
                             
                         </div>
                     </div>
                     <div id="div_cards" class="tanques_lista">
-                         <!-- <div id="div_cards"></div> -->
                     </div>
-                   
-
-                    <!-- <div class="tanques_lista">
-                        <div class="elemento_lista">
-                            <div class="head_elemento_lista">
-                                <div class="etiqueta_vermelho"></div>
-                                Tanque A01
-                            </div>
-                            <div class="corpo_elemento_lista">
-                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 73,6%</span>
-                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco A</span>
-                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 02/02/1981</span>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="elemento_lista">
-                            <div class="head_elemento_lista">
-                                <div class="etiqueta_verde"></div>
-                                Tanque A02
-                            </div>
-                            <div class="corpo_elemento_lista">
-                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 39,5%</span>
-                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco C</span>
-                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 18/06/2022</span>
-                            </div>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <div class="head_elemento_lista">
-                                <div class="etiqueta_amarelo"></div>
-                                Tanque A03
-                            </div>
-                            <div class="corpo_elemento_lista">
-                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span> 26,97%</span>
-                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span> bloco B</span>
-                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span> 30/01/2026</span>
-                            </div>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-
-                        <div class="elemento_lista">
-                            <span class="add_tanque">
-                                <img src="Captura de tela 2026-05-17 131950.png" alt="">
-                                <span>Cadastre seu tanque!</span>
-                            </span>
-                        </div>
-                    </div> -->
 
                 </div>
 
                 <!-- ALERTAS -->
-                <div class="alerts">
-                    <div class="titulo">ALERTAS | 3 alertas emitidos hoje</div>
-                    <div class="alert">
-                        <span>CO2 Baixo - Tanque #003 <span>13/04/2026 - 13:57</span>
-                        </span>
-                    </div>
-                    <div class="alert"><span>CO2 Alto - Tanque #004 <span>13/04/2026 - 14:51</span></span></div>
-                    <div class="alert"><span>CO2 Alto - Tanque #005 <span>06/04/2026 - 11:55</span></span></div>
+             <div class="alerts">
+    <div class="titulo">ALERTAS</div>
 
-                </div>
-            </div>
+    <div id="alertaX"></div>
+</div>
         </div>
     </div>
     <script>
+
+        let listaTanques = [];
 
         window.onload = () => {
             kpiSensor()
             kpiAlerta()
             mostrarCards()
+            mostrarAlerta()
+            kpiTanqueAlerta()
+            kpiVariacao()
     }
 
     function kpiSensor() {
@@ -223,6 +138,59 @@
         })
     }
 
+     function kpiVariacao() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+        fetch(`/geral/alertas4/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) { 
+                resposta.json().then((dados) => {
+                    variacao.innerHTML = `${dados[0].nome_identificador}`
+                })
+            }
+        })
+    }
+
+    function kpiTanqueAlerta() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+        fetch(`/geral/tanqueAlertas/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) { 
+                resposta.json().then((dados) => {
+                    tanqueAlerta.innerHTML = `${dados[0].tanques_com_alerta}`
+                })
+            }
+        })
+    }
+
+    function mostrarAlerta() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+        
+        fetch(`/geral/alertas2/${idEmpresa}`).then((resposta) => {
+            if (resposta.ok) {
+                
+                resposta.json().then(function (dados) {
+                    alertaX.innerHTML = "";
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
+                    for(let i = 0; i < dados.length; i++){
+                
+                        alertaX.innerHTML +=`<a href="alertas.html">
+                            <div class="alert">
+                        <span class="xxx">${dados[i].tanque}</span> - 
+                        <span>${dados[i].mensagem}</span> - 
+                        <span>${dados[i].nivel}</span> - 
+                        <span>${dados[i].data_alerta}</span>
+                    </div>
+                            </a>`;
+                    }
+                
+
+                });
+            }
+        })
+    }
+
+
+
+
     function mostrarCards() {
         var idEmpresa = sessionStorage.ID_EMPRESA;
 
@@ -230,32 +198,12 @@
             if (resposta.ok) {
                 
                 resposta.json().then(function (dados) {
+                    listaTanques = dados;
                     
                     console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
-                    for(let i = 0; i < dados.length; i++){
-                        let estilo 
-                     if(dados[i].nivel > 60){
-                            estilo = "etiqueta_vermelho"
-                        }else if(dados[i].nivel < 20){
-                            estilo = "etiqueta_amarelo";
-                        }else{
-                            estilo = "etiqueta_verde";
-                        }
-                        div_cards.innerHTML +=`
-                            <div class="elemento_lista">
-                            <div class="head_elemento_lista">
-                                <div class="${estilo}"></div>
-                                ${dados[i].tanque}
-                            </div>
-                            <div class="corpo_elemento_lista">
-                                <span><img src="Captura de tela 2026-05-17 104101.png" alt=""><span class="negrito">Nível:</span>${dados[i].nivel}</span>
-                                <span><img src="Captura de tela 2026-05-17 104133.png" alt=""><span class="negrito">Localização:</span>${dados[i].localizacao}</span>
-                                <span><img src="Captura de tela 2026-05-17 105543.png" alt=""><span class="negrito">Último alerta:</span>${dados[i].ultimo_alerta}</span>
-                            </div>
-                        `;
+                    listaTanques = dados;
 
-                    }
-                
+                    renderizarCards(dados);
 
                 });
             } else {
@@ -269,88 +217,130 @@
 
     }
 
-        // function abrirTanques() {
+    kpiSensor();
+    kpiAlerta();
+    kpiVariacao();
+    mostrarAlerta();
+    kpiTanqueAlerta();
+    mostrarCards();
 
-        //     let submenuNovo = document.getElementById("submenuTanques");
+        setInterval(() => {
+            kpiSensor();
+            kpiAlerta();
+            kpiVariacao();
+            mostrarAlerta();
+            kpiTanqueAlerta();
+            mostrarCards();
+        }, 1000);
 
-        //     if (submenuNovo.className == "submenu") {
-        //         submenuNovo.className = "submenu ativo";
-        //     } else {
-        //         submenuNovo.className = "submenu";
-        //     }
-        // }
+    function abrirTanque(idArmazenamento){
 
+        sessionStorage.ID_ARMAZENAMENTO = idArmazenamento;
+        window.location.href = "tanques.html";
+    }
 
-        // Chart.defaults.color = '#ffffff';
+    function renderizarCards(dados) {
+    div_cards.innerHTML = "";
 
-        // new Chart(document.getElementById('chart2'), {
-        //     type: 'bar',
-        //     data: {
-        //         labels: ['', 'T1', 'T2', 'T3', 'T4', 'T5', ''],
-        //         datasets: [
-        //             {
-        //                 label: 'CO2 por Tanque',
-        //                 data: [null, 30, 40, 15, 60, 50, null],
-        //                 backgroundColor: 'rgb(114, 47, 55)',
-        //                 borderColor: 'white',
-        //                 borderWidth: 2,
-        //                 borderRadius: 5,
-        //                 order: 2,
-        //                 barPercentage: 0.5,
-        //                 categoryPercentage: 0.5
-        //             },
-        //             {
-        //                 label: 'Mínimo Ideal',
-        //                 data: [20, 20, 20, 20, 20, 20, 20],
-        //                 borderColor: 'green',
-        //                 borderWidth: 2,
-        //                 type: 'line',
-        //                 pointRadius: 0,
-        //                 fill: false,
-        //                 order: 1
-        //             },
-        //             {
-        //                 label: 'Faixa Ideal',
-        //                 data: [40, 40, 40, 40, 40, 40, 40],
-        //                 borderColor: 'green',
-        //                 borderWidth: 2,
-        //                 type: 'line',
-        //                 pointRadius: 0,
-        //                 fill: '-1',
-        //                 backgroundColor: 'rgba(0, 255, 0, 0.1)',
-        //                 order: 1
-        //             }
-
-        //         ]
-        //     },
-        //     options: {
-        //         responsive: true,
-        //         maintainAspectRatio: false,
-        //         scales: {
-        //             x: {
-        //                 offset: true,
-        //                 grid: {
-        //                     display: false
-        //                 },
-        //                 ticks: {
-        //                     // Isso evita que apareça o vazio na legenda do eixo X que ta la no label
-        //                     callback: function (val, index) {
-        //                         return this.getLabelForValue(val);
-        //                     }
-        //                 }
-        //             },
-        //             y: {
-        //                 beginAtZero: true,
-        //                 max: 100,
-        //                 grid: {
-        //                     color: 'rgba(255,255,255,0.1)'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
+    for(let i = 0; i < dados.length; i++) {
+       let estilo;
 
 
+
+let corNivel;
+
+if (dados[i].nivel < 20) {
+    estilo = "etiqueta_amarelo";
+    corNivel = "#fbc02d";
+} 
+else if (dados[i].nivel <= 40) {
+    estilo = "etiqueta_verde";
+    corNivel = "#2e7d32";
+} 
+else if (dados[i].nivel <= 60) {
+    estilo = "etiqueta_laranja";
+    corNivel = "#f57c00";
+} 
+else {
+    estilo = "etiqueta_vermelho";
+    corNivel = "#c62828";
+}
+
+if(dados[i].nivel >= 0){
+    div_cards.innerHTML += `
+            <div onclick= "pegarid(${dados[i].id})" class="elemento_lista">
+                <div class="head_elemento_lista">
+                    <div class="${estilo}"></div>${dados[i].tanque}</div>
+                <div class="corpo_elemento_lista">
+                    <p style="color:${corNivel}">${dados[i].nivel}%</p>
+                    <span><span class="negrito">Localização:</span>${dados[i].localizacao}</span>
+                    <span><span class="negrito">Último alerta:</span>${dados[i].ultimo_alerta}</span>
+                </div>
+            </div>
+        `;
+} else {
+    div_cards.innerHTML += `
+            <div onclick= "pegarid(${dados[i].id})" class="elemento_lista">
+                <div class="head_elemento_lista">
+                    <div class="${estilo}"></div>${dados[i].tanque}</div>
+                <div class="corpo_elemento_lista">
+                    <p style="color:${corNivel}">${dados[i].nivel}</p>
+                    <span><span class="negrito">Localização:</span>${dados[i].localizacao}</span>
+                    <span><span class="negrito">Último alerta:</span>${dados[i].ultimo_alerta}</span>
+                </div>
+            </div>
+        `;
+}
+        
+    }
+}
+
+function pegarid(id){
+    window.location.href = `tanques.html?id=${id}`
+}
+
+function pesquisarNome() {
+    let pesquisa = ipt_pesq.value.toLowerCase();
+    let resultado = [];
+
+    for(let i = 0; i < listaTanques.length; i++) {
+        if(listaTanques[i].tanque.toLowerCase().includes(pesquisa)) {
+            resultado.push(listaTanques[i]);
+        }
+    }
+
+    renderizarCards(resultado);
+}
+
+ function filtrarTanques() {
+    let filtro = ipt_filtro.value;
+    let resultado = [];
+
+    for (let i = 0; i < listaTanques.length; i++) {
+
+        if (filtro == "x") {
+            resultado.push(listaTanques[i]);
+        }
+
+        else if (filtro == "4" && listaTanques[i].nivel < 20) {
+            resultado.push(listaTanques[i]);
+        }
+
+        else if (filtro == "3" && listaTanques[i].nivel>= 20 && listaTanques[i].nivel<= 40) {
+            resultado.push(listaTanques[i]);
+        }
+
+        else if (filtro == "5" && listaTanques[i].nivel> 40 && listaTanques[i].nivel<= 60) {
+            resultado.push(listaTanques[i]);
+        }
+
+        else if (filtro == "6" && listaTanques[i].nivel> 60) {
+            resultado.push(listaTanques[i]);
+        }
+    }
+
+    renderizarCards(resultado);
+}
     </script>
 
 </body>

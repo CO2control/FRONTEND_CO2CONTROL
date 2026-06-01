@@ -67,9 +67,9 @@
 
         let nome = ipt_nomeIdentificador.value;
         let local = ipt_local.value;
-        let tipo = tipo.value;
+        let tipoTanque = tipo.value;
         let capacidade = ipt_capacidade.value;
-        let status = utilizacao.value 
+        let statusUso = utilizacao.value;
 
              fetch(`/geral/addTanque/${idEmpresa}`, {
         method: "POST",
@@ -79,10 +79,10 @@
         body: JSON.stringify({
         nomeServer: nome,
         localServer: local,
-        tipoServer: tipo,
+        tipoServer: tipoTanque,
         capacidadeServer: capacidade,
-        statusServer: status
-        }),
+        statusServer: statusUso
+    }),
       })
       .then(function (resposta) {
         console.log("resposta: ", resposta);

@@ -1,5 +1,4 @@
-
-CREATE DATABASE co2ntrol;
+CREATE DATABASE IF NOT EXISTS co2ntrol;
 USE co2ntrol;
 
 -- Tabela Empresa
@@ -81,10 +80,12 @@ CREATE TABLE leitura_sensor (
 CREATE TABLE alerta (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_sensor INT NOT NULL,
+    fk_leitura INT NOT NULL,
     mensagem VARCHAR(255),
     nivel VARCHAR(20) CHECK (nivel IN ('BAIXO', 'ALTO', 'CRITICO')),
     data_alerta DATETIME DEFAULT CURRENT_TIMESTAMP(),
-    CONSTRAINT fk_alerta_sensor FOREIGN KEY (fk_sensor) REFERENCES sensor(id)
+    CONSTRAINT fk_alerta_sensor FOREIGN KEY (fk_sensor) REFERENCES sensor(id),
+    CONSTRAINT fk_alerta_leitura FOREIGN KEY (fk_leitura) REFERENCES leitura_sensor(id)
 );
 
 -- INSERTS 
@@ -116,25 +117,16 @@ INSERT INTO endereco (fk_empresa, cep, logradouro, numero, complemento, estado, 
 		(1, '01234000', 'Avenida Paulista', 1000, 'Andar 15', 'SP', 'São Paulo'),
 		(2, '95700000', 'Rua dos Vinhedos', 50, 'Galpão B', 'RS', 'Bento Gonçalves');
 
--- 4. Armazenamentos
-INSERT INTO armazenamento (nome_identificador, fk_empresa, tipo, capacidade, utilizacao) 
-    VALUES ('Tanque de Inox T-01', 1, 'TANQUE', 5000.00, 1),
-           ('Foudre de Carvalho F-01', 2, 'FOUDRE', 2000.00, 1);
+-- 4. Armazenamento
+INSERT INTO armazenamento (nome_identificador, local_tanque, fk_empresa, tipo, capacidade, utilizacao) 
+    VALUES ('F-02', 'Bloco A', 2, 'FOUDRE', 5000.00, 1),
+           ('F-03', 'Bloco B', 2, 'FOUDRE', 5000.00, 1);
 
 -- 5. Sensores
 INSERT INTO sensor (fk_armazenamento, nivel_carbono_min, nivel_carbono_max, situacao) 
     VALUES (1, 300.00, 800.00, 1),
            (2, 400.00, 1000.00, 1);
 
--- 6. Leituras
-INSERT INTO leitura_sensor (fk_sensor, nivel_carbono) 
-    VALUES (1, 450.50),
-           (1, 460.20),
-           (2, 1200.00);
-
--- 7. Alerta
-INSERT INTO alerta (fk_sensor, mensagem, nivel) 
-    VALUES (2, 'Nível de CO2 acima do limite permitido no Foudre F-01!', 'CRITICO');
 
 -- Consulta para visualizar a Empresa principal e suas filhiais
 SELECT matriz.razao_social AS matriz, filial.razao_social AS filial FROM empresa matriz
@@ -152,11 +144,10 @@ SELECT e.razao_social, en.logradouro, en.numero, en.municipio, en.estado FROM em
 
 SELECT  e.razao_social AS empresa, a.tipo AS tipo_tanque, s.nivel_carbono_max AS limite_max, l.nivel_carbono AS valor_lido,
     al.mensagem AS alerta, al.nivel AS nivel_alerta, al.data_alerta AS momento_do_erro FROM alerta al
-		INNER JOIN sensor s ON al.fk_sensor = s.id
-		INNER JOIN armazenamento a ON s.fk_armazenamento = a.id
-		INNER JOIN usuario u ON a.fk_usuario = u.id
-		INNER JOIN empresa e ON u.fk_empresa = e.id
-		INNER JOIN leitura_sensor l ON l.fk_sensor = s.id
+        INNER JOIN sensor s ON al.fk_sensor = s.id
+        INNER JOIN armazenamento a ON s.fk_armazenamento = a.id
+        INNER JOIN empresa e ON a.fk_empresa = e.id 
+        INNER JOIN leitura_sensor l ON al.fk_leitura = l.id 
 WHERE al.nivel = 'CRITICO' ORDER BY al.data_alerta DESC;
             
 -- Consultas de alertas hoje.
@@ -174,9 +165,24 @@ SELECT mensagem, data_alerta FROM alerta
 	WHERE nivel = 'CRITICO'
 		ORDER BY data_alerta DESC;
         
+select * from alerta;
+
 -- Consulta que mostra a quantidade de sensores ativos, comparado ao total
--- Explicação como definimos no bacno que 1 é ativo e 0 é inativo, somar a coluna inteira resulta exatamente no número de sensores ligados.
+-- Explicação: como definimos no bacno que 1 é ativo e 0 é inativo, somar a coluna inteira resulta exatamente no número de sensores ligados.
 SELECT SUM(situacao) AS ativos, COUNT(id) AS total FROM sensor;
 
 -- Consulta que mostra a quantidade de armazenamentos ativos, comparado ao total
 SELECT SUM(utilizacao) AS ativos, COUNT(id) AS total FROM armazenamento;
+
+CREATE VIEW vw_dashboard
+AS
+SELECT 
+	ls.id,
+    ls.nivel_carbono,
+    ls.data_registro,
+    s.fk_armazenamento,
+    a.fk_empresa
+FROM leitura_sensor ls
+JOIN sensor s ON s.id = ls.fk_sensor
+JOIN armazenamento a ON a.id = s.fk_armazenamento
+JOIN empresa e ON e.id = a.fk_empresa;

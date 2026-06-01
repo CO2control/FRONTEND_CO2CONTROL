@@ -1,13 +1,22 @@
 var mysql = require("mysql2");
 
 // CONEXÃO DO BANCO MYSQL SERVER
+// var mySqlConfig = {
+//     host: 'localhost',
+//     database: 'co2ntrol',
+//     user: 'aluno',
+//     password: 'sptech',
+//     port: 3306
+// };
+
 var mySqlConfig = {
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
+    host: 'localhost',
+    database: 'co2ntrol',
+    user: 'aluno',
+    password: 'Sptech#2024',
+    port: 3307
 };
+
 
 function executar(instrucao) {
 
@@ -19,6 +28,8 @@ function executar(instrucao) {
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
+        conexao.query("SET autocommit = 1");
+        
         conexao.query(instrucao, function (erro, resultados) {
             conexao.end();
             if (erro) {

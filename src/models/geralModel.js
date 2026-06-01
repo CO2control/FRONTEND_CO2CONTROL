@@ -35,32 +35,95 @@ function buscarAlertas(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function buscarCards(idEmpresa) {
+function buscarAlertas2(idEmpresa) {
 
-    var instrucaoSql = `SELECT 
-    a.nome_identificador AS tanque,
-    l.nivel_carbono AS nivel,
-    a.local_tanque AS localizacao,
-    date_format(MAX(al.data_alerta), '%d/%m/%Y %H:%i') AS ultimo_alerta
-    FROM armazenamento a
-    JOIN sensor s 
-        ON s.fk_armazenamento = a.id
-    LEFT JOIN leitura_sensor l 
-        ON l.fk_sensor = s.id
-    LEFT JOIN alerta al 
-        ON al.fk_sensor = s.id
-    WHERE a.fk_empresa = ${idEmpresa}
-    GROUP BY 
-        a.id,
-        a.nome_identificador,
-        l.nivel_carbono,
-        a.local_tanque;`;
+    var instrucaoSql = `select 
+    a.nome_identificador as tanque,
+    al.mensagem,
+    date_format(al.data_alerta, '%d/%m/%Y %H:%i') as data_alerta,
+    al.nivel
+    from alerta al
+    inner join sensor s 
+        on al.fk_sensor = s.id
+    inner join armazenamento a 
+        on s.fk_armazenamento = a.id
+    join empresa e
+        on e.id = a.fk_empresa
+    where e.id = ${idEmpresa}
+    and date(al.data_alerta) = curdate()
+    order by al.data_alerta desc;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function buscarTanqueAlerta(idEmpresa) {
+
+    var instrucaoSql = `select count(distinct a.id) as tanques_com_alerta
+    from alerta al
+    join sensor s
+    on al.fk_sensor = s.id
+    join armazenamento a
+    on s.fk_armazenamento = a.id
+    where a.fk_empresa = ${idEmpresa}
+    and date(al.data_alerta) = curdate();`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarVariacao(idEmpresa) {
+
+    var instrucaoSql = `select s.id, a.nome_identificador, max(nivel_carbono), 
+        min(nivel_carbono), 
+        (max(nivel_carbono) - min(nivel_carbono)) as diferenca 
+        from leitura_sensor ls join sensor s 
+        on ls.fk_sensor = s.id join armazenamento a
+        on s.fk_armazenamento = a.id join empresa e
+        on a.fk_empresa = ${idEmpresa}
+        group by s.id
+        order by diferenca desc
+        limit 1;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarCards(idEmpresa) {
+
+    var instrucaoSql = `select a.id, a.nome_identificador as tanque, a.local_tanque as localizacao, 
+ifnull((select l.nivel_carbono from leitura_sensor l 
+join sensor s on l.fk_sensor = s.id 
+where s.fk_armazenamento = a.id order by l.data_registro desc limit 1) , 'Aguarde' )
+as nivel,
+ ifnull((select max(data_registro) from leitura_sensor l2 
+join sensor s2 on s2.id = l2.fk_sensor where s2.fk_armazenamento = a.id ), 'Sem alertas' )
+as ultimo_alerta
+from armazenamento a join empresa e on e.id = a.fk_empresa where e.id = ${idEmpresa};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function addTanque(nome, local, tipo, capacidade, status, idEmpresa) {
+
+    var instrucaoSql = `
+        insert into armazenamento
+        (nome_identificador, local_tanque, fk_empresa, tipo, capacidade, utilizacao)
+        values
+        ('${nome}', '${local}', ${idEmpresa}, '${tipo}', ${capacidade}, ${status});
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {  
     buscarSensores,
     buscarAlertas,
-    buscarCards
+    buscarCards,
+    buscarAlertas2,
+    buscarTanqueAlerta,
+    buscarVariacao,
+    addTanque
 }
