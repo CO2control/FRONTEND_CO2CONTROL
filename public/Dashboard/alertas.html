@@ -136,6 +136,13 @@
         }).catch(function (erro) {
             console.log(erro);
         })
+
+       
+    exibirAlertas();
+
+        setInterval(() => {
+            exibirAlertas();
+        }, 1000);
     }
     exibirAlertas(filter_select.value);
 </script>

@@ -7,6 +7,15 @@ function buscarGrafico1(req, res){
     var idEmpresa = req.params.idEmpresa;
     var idArmazenamento = req.params.idArmazenamento;
 
+    if (!idArmazenamento || idArmazenamento === "undefined" || idArmazenamento === "null") {
+        console.log("\x1b[33m[Aviso] Requisição de gráfico abortada: idArmazenamento veio undefined.\x1b[0m");
+        return res.status(400).json({ erro: "idArmazenamento é obrigatório e não pode ser undefined" });
+    }
+
+    if (!idEmpresa || idEmpresa === "undefined" || idEmpresa === "null") {
+        return res.status(400).json({ erro: "idEmpresa é obrigatório" });
+    }
+
     tanquesModel.buscarGrafico1(idEmpresa, idArmazenamento)
     .then(function(resultado){
         res.json(resultado);

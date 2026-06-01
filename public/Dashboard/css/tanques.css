@@ -244,6 +244,150 @@ span {
 
 
 
+/* Parte do bobIA */
+#bobIa_section {
+    position: fixed;
+    /* Fixa o elemento na janela do navegador */
+    bottom: 30px;
+    /* Distância da borda inferior da tela */
+    right: 30px;
+    /* Distância da borda direita da tela */
+    z-index: 9999;
+}
+
+
+#circulo_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    transition: 0.3s ease;
+    background-color: #ececec;
+    border: 3px dashed #a00000;
+    cursor: pointer;
+}
+
+#circulo_info:hover {
+    transform: translateY(-5px);
+}
+
+
+#circulo_info img {
+    width: 35px;
+}
+
+#chat_bobIa {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: fit-content;
+    height: 530px;
+    width: 430px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 20px;
+    border: 3px solid #740000;
+}
+
+#head_chat{
+    background-color: rgb(210, 210, 210);
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+#head_chat span{
+    font-size: 25px;
+    font-weight: bold;
+    color: #420505;
+}
+
+#sair_chat{
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: bold;
+    color: #420505;
+}
+
+#resposta{
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    height: 80%;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    align-self: center;
+    padding: 3px;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+#pergunta{
+    width: 280px;
+    height: 30px;
+}
+
+#enviar_pergunta_section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
+    margin: 5px 10px;
+}
+
+#botao_chat{
+    color: #e0e0e0;
+    background-color: #990000;
+    height: 35px;
+    width: 75px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    color: #ececec;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+
+.pergunta_user{
+    background-color: #EAEFF2;
+    color: #2C3E50;
+    width: 80%;
+    min-height: fit-content;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+.resposta_chat{
+    background-color: #D4E2D4;
+    color: #2D3E2D;
+    width: 80%;
+    min-height: fit-content;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+
+
+
+
 
 
 

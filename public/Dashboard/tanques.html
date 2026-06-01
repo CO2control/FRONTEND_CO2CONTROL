@@ -40,7 +40,7 @@
         <!-- KPIs -->
         <div class="kpis">
 
-            <div class="kpi sombra-preta">
+            <div class="kpi sombra-preta" onclick="explicarKPI('Tanque', 'kpiNome')">
                 <div class="kpi-title"><span>Tanque</span></div>
                 <div class="kpi-value1">
                     <span id="kpiNome"></span>
@@ -48,7 +48,7 @@
                 <img src="./assets/wi-fi.png">
             </div>
 
-            <div class="kpi" id="kpiMaximo">
+            <div class="kpi" id="kpiMaximo" onclick="explicarKPI('Maximo Antigido', 'kpiValorMaximo')">
                 <div class="kpi-title"><span>Máximo Atingido</span></div>
                 <div class="kpi-value">
                     <span id="kpiValorMaximo"></span>
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="kpi sombra-amarela" >
+            <div class="kpi sombra-amarela" onclick="explicarKPI('Têndencia Atual', 'kpiTendencia')">
                 <div class="kpi-title"><span>Tendência atual</span></div>
                 <img id="imgTendencia" alt="Tendência">
                 <div class="kpi-value">
@@ -67,7 +67,8 @@
                 </div>
             </div>
 
-            <div class="kpi" id="kpiCorAlerta">
+            <div class="kpi" id="kpiCorAlerta"
+                onclick="explicarKPI('Alertas emitidos hoje', 'kpiAlertas', 'ultimoAlerta')">
                 <div class="kpi-title">
                     <span>Alertas emitidos hoje</span>
                 </div>
@@ -111,21 +112,49 @@
         </div>
     </div>
 
+    <div id="bobIa_section">
+        <div id="circulo_info" onclick="mostrarChat()">
+            <img src="../img/icon-ia.png" alt="">
+        </div>
+
+        <div id="chat_bobIa">
+            <div id="head_chat"><span>ControlBot</span>
+                <div id="sair_chat" onclick="fecharChat()">x</div>
+            </div>
+
+            <div id="resposta"></div>
+
+        </div>
+    </div>
+
 </body>
 
 </html>
 <script>
+    let url = new URLSearchParams(window.location.search);
+    let idurl = url.get('id')
+
+    if (idurl) {
+        sessionStorage.ID_ARMAZENAMENTO = idurl;
+    }
+
+    let idArmazenamentoAtual = sessionStorage.ID_ARMAZENAMENTO;
+
+    if (!idArmazenamentoAtual || idArmazenamentoAtual === "undefined") {
+        window.location = "dashboard.html";
+    }
+
 
     function editarArmazenamento() {
-        sessionStorage.ID_ARMAZENAMENTO = idArmazenamentoAtual;
-        window.location = "atualizar-tanques.html";
+        // sessionStorage.ID_ARMAZENAMENTO = idArmazenamentoAtual;
+        window.location = `atualizar-tanques.html?id=${idArmazenamentoAtual}`;
     }
 
     function excluir() {
         if (!confirm('Tem certeza que deseja excluir este tanque?')) {
             return;
         } else {
-            fetch(`/tanques/excluirTanque/${sessionStorage.ID_ARMAZENAMENTO}`, {
+            fetch(`/tanques/excluirTanque/${idArmazenamentoAtual}`, {
                 method: "DELETE"
             })
                 .then(function (resposta) {
@@ -149,7 +178,7 @@
 
     Chart.defaults.color = '#000';
 
-    let idArmazenamentoAtual;
+    
     let graficoLinha;
     let graficoMeiaLua;
 
@@ -160,7 +189,7 @@
 
     function buscarKPIs(){
 
-        fetch(`/tanques/buscarKPIs/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+        fetch(`/tanques/buscarKPIs/${sessionStorage.ID_EMPRESA}/${idArmazenamentoAtual}`)
 
         .then(function (resposta) {
             return resposta.json();
@@ -174,8 +203,8 @@
                 return;
             }
 
-            sessionStorage.ID_ARMAZENAMENTO = dados[0].idArmazenamento;
-            idArmazenamentoAtual = dados[0].idArmazenamento;
+            // sessionStorage.ID_ARMAZENAMENTO = dados[0].idArmazenamento;
+            // idArmazenamentoAtual = dados[0].idArmazenamento;
             kpiNome.innerHTML = dados[0].nome;
             kpiValorMaximo.innerHTML = Number(dados[0].maximo).toFixed(1) + '%';
             kpiAlertas.innerHTML = dados[0].alertas;
@@ -216,7 +245,8 @@
                 corKpiAlerta.classList.add("sombra-vermelha")
             }
 
-        });
+        })
+        .catch(erro => console.log("Aguardando ID estabilizar..."));
 
     }
 
@@ -224,7 +254,7 @@
 
     function buscarTendencia(){
 
-        fetch(`/tanques/buscarTendencia/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+        fetch(`/tanques/buscarTendencia/${sessionStorage.ID_EMPRESA}/${idArmazenamentoAtual}`)
         .then(function (resposta) {
             return resposta.json();
         })
@@ -257,7 +287,8 @@
 
             kpiTendencia.innerHTML = tendencia;
 
-        });
+        })
+        .catch(erro => console.log("Aguardando ID estabilizar..."));
     }
 
     
@@ -272,13 +303,13 @@
             buscarGraficoMeiaLua();
             buscarKPIs();
             buscarTendencia();
-        }, 2000);
+        }, 1000);
 
 
 
     function buscarGraficoLinha() {
 
-        fetch(`/tanques/buscarGrafico1/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+        fetch(`/tanques/buscarGrafico1/${sessionStorage.ID_EMPRESA}/${idArmazenamentoAtual}`)
             .then(function (resposta) {
                 return resposta.json();
             })
@@ -303,14 +334,15 @@
                 }
 
                 criarGraficoLinha(nomes, valores);
-            });
+            })
+            .catch(erro => console.log("Aguardando ID estabilizar..."));
     }
 
 
     
     function buscarGraficoMeiaLua() {
 
-        fetch(`/tanques/buscarGrafico2/${sessionStorage.ID_EMPRESA}/${sessionStorage.ID_ARMAZENAMENTO}`)
+        fetch(`/tanques/buscarGrafico2/${sessionStorage.ID_EMPRESA}/${idArmazenamentoAtual}`)
             .then(function (resposta) {
                 return resposta.json();
             })
@@ -342,7 +374,8 @@
                 }
 
                 document.getElementById("statusCO2").innerHTML = `Status: ${status}`;
-            });
+            })
+            .catch(erro => console.log("Aguardando ID estabilizar..."));
     }
 
 
@@ -460,6 +493,71 @@
                 }
             }
         });
+
+    }
+
+    // Paerte do bobIA
+    function explicarKPI(nome_kpi, id_valor_principal, id_valor_secundario = null) {
+        mostrarChat();
+
+        let valorPrincipal = document.getElementById(id_valor_principal).innerText;
+
+        let pergunta_formatada = `O indicador "${nome_kpi}" está com o valor de "${valorPrincipal}". O que isso significa para a minha fermentação de vinho e qual a ação recomendada?`;
+
+        // Esse daqui é so para o KPI que passa também o último alerta
+        if (id_valor_secundario) {
+            let valorSecundario = document.getElementById(id_valor_secundario).innerText;
+            pergunta_formatada = `O indicador "${nome_kpi}" está com o valor de "${valorPrincipal}" (${valorSecundario}). O que isso significa para a minha fermentação de vinho e qual a ação recomendada?`;
+        }
+
+        gerarResposta(pergunta_formatada);
+    }
+
+
+
+    function mostrarChat() {
+        chat_bobIa.style.display = "flex";
+        circulo_info.style.display = "none";
+    }
+
+    function fecharChat() {
+        chat_bobIa.style.display = "none";
+        circulo_info.style.display = "flex";
+    }
+
+
+    // BOBIA
+    async function gerarResposta(pergunta) {
+
+        resposta.innerHTML += `<div class="pergunta_user">${pergunta}</div>`;
+
+        resposta.innerHTML += `<div class="resposta_chat" id="digitando">ControlBot digitando...</div>`;
+
+        const response = await fetch('http://localhost:3000/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
+
+        const data = await response.json();
+
+        let carregamento = document.getElementById('digitando');
+
+        if (carregamento) {
+            carregamento.remove();
+        }
+
+        // resposta.style.display = 'block';
+        // document.getElementById('resposta').innerText = data.resultado;
+
+        if (data.resultado) {
+            resposta.innerHTML += `<div class="resposta_chat">${data.resultado}</div>`;
+        } else {
+            resposta.innerHTML += `<div class="resposta_chat" style="color: red;">Ops! O ControlBot está com muita demanda agora. Tente clicar novamente em alguns segundos.</div>`;
+        }
+
 
     }
 

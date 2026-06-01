@@ -26,10 +26,11 @@
                 </div>
 
                 <div class="menu">
-                    <div class="navbar">INÍCIO</div>
-                    <div>SOLUÇÃO</div>
-                    <div>CALCULADORA</div>
-                    <div>SOBRE NÓS</div>
+                    <!-- <div class="navbar">INÍCIO</div> -->
+                    <a href="#solucao"><div>SOLUÇÃO</div></a>
+                    <a href="#calculadora"><div>CALCULADORA</div></a>
+                    <a href="#contatoC"><div>CONTATO</div></a>
+                    <a href="#sobreN"><div>SOBRE NÓS</div></a>
                 </div>
 
                 <div class="btn-client"><a href="login.html">ÁREA DO CLIENTE</a></div>
@@ -55,7 +56,7 @@
     <div class="containerContent">
         <div class="mainContent">
             <div class="mainText">
-                <div class="mainTitle">
+                <div class="mainTitle" id="solucao">
                     <h1>Controle de CO2 <span>eficiente</span> e barato</h1>
                 </div>
                 <div class="contentText">
@@ -89,7 +90,7 @@
 
 
     <!-- Simulador financeiro -->
-    <div class="simulador-financeiro">
+    <div class="simulador-financeiro" id="calculadora">
         <div class="head">
             <img src="img/logo black.png" alt="Logo CO2ntrol">
             <h1><span class="sublinhado">Simulador</span> <span class="txt_destaque">Financeiro</span></h1>
@@ -135,26 +136,29 @@
     <!-- Formulário de cadastro -->
     <div class="contato">
 
-        <div class="head2">
-            <h1><span class="sublinhado2">ENTRE EM CONTATO</span><span class="txt_destaque">CONOSCO</span></h1>
-            <h3>Preencha o formulário e nossa equipe entrará em contato coma melhor solução para sua vinícola.</h3>
+        <div class="head2" id="contatoC">
+            <h1><span class="sublinhado2">CADASTRE SUA </span><span class="txt_destaque">EMPRESA</span></h1>
+            <h3>Preencha seus dados e entraremos em contato para cadastrar sua empresa!</h3>
         </div>
         <div class="formularioContato">
             <div class="campoContato">
                 <span for="empresa">Nome da empresa:</span>
                 <input type="text" id="empresa" placeholder="Digite o nome da empresa">
+                <div id="nomeI"></div>
             </div>
             <div class="campoContato">
                 <span for="email">E-mail:</span>
                 <input type="email" id="email" placeholder="Digite seu e-mail">
+                <div id="emailI"></div>
             </div>
             <div class="campoContato">
                 <span for="telefone">Telefone para contato:</span>
                 <input type="tel" id="telefone" placeholder="(11) 99999-9999">
+                <div id="telI"></div>
             </div>
         </div>
 
-        <button class="btn-contato">Entrar em contato</button>
+        <button onclick="entreContato()" class="btn-contato">Entrar em contato</button>
     </div>
 
 
@@ -162,7 +166,7 @@
 
 
     <!-- Sobre nós -->
-    <div class="containerAboutUs">
+    <div class="containerAboutUs" id="sobreN">
         <div class="titleTextAboutUs">
             <div class="aboutUsTitle">
                 <h1>Quem somos?</h1>
@@ -191,29 +195,19 @@
     </div>
 
 
-    <div id="bobIa_section">
-        <div id="circulo_info" onclick="mostrarChat()">
-            <img src="img/info.png" alt="">
-        </div>
-
-        <div id="chat_bobIa">
-            <div id="head_chat"><span>ControlBot</span>
-                <div id="sair_chat" onclick="fecharChat()">x</div>
+    <div id="help_section">
+        <a href="https://sptech-team-j3dwrfgb.atlassian.net/jira/software/form/ec44a4aa-c04a-4566-acc1-1de241fb219e?atlOrigin=eyJpIjoiMDNhYWI2YmZjOWY0NGY2OGIzZTgwZGJjMDhmMzg4ZDUiLCJwIjoiaiJ9"
+            target="_blank">
+            <div id="circulo_info">
+                <img src="img/suporte.png" alt="">
             </div>
-
-            <div id="resposta"></div>
-
-            <div id="enviar_pergunta_section">
-                <input type="text" id="pergunta">
-                <button id="botao_chat" onclick="gerarResposta()">Enviar</button>
-            </div>
-        </div>
+        </a>
     </div>
 
 
 
     <div class="footer">
-        <a href="https://sptech-team-j3dwrfgb.atlassian.net/jira/software/form/ec44a4aa-c04a-4566-acc1-1de241fb219e?atlOrigin=eyJpIjoiMDNhYWI2YmZjOWY0NGY2OGIzZTgwZGJjMDhmMzg4ZDUiLCJwIjoiaiJ9" target="_blank">Falar com o Suporte</a>
+        
     </div>
 </body>
 
@@ -288,5 +282,25 @@
         // resposta.style.display = 'block';
         // document.getElementById('resposta').innerText = data.resultado;
         resposta.innerHTML += `<div class="resposta_chat">${data.resultado}</div>`;
+    }
+
+    function entreContato() {
+        let nome = empresa.value;
+        let gmail = email.value;
+        let contato = telefone.value;
+
+         nomeI.innerHTML = "";
+        emailI.innerHTML = "";
+        telI.innerHTML = "";
+
+        if (nome == "") {
+            nomeI.innerHTML = `Preencha o nome da empresa!`
+        } if (!(gmail.includes('@') && gmail.includes('.'))) {
+            emailI.innerHTML = `Endereço de email inválido!`
+        } if(contato == "") {
+            telI.innerHTML = `Preencha o telefone para contato!`
+        } else {
+            alert("Solicitação realizada! Entraremos em contato em breve! Obrigado pela preferência.")
+        }
     }
 </script>
