@@ -72,15 +72,14 @@ function buscarKPIs(idEmpresa, idArmazenamento) {
             (
                 SELECT COUNT(*) FROM vw_dashboard
                 WHERE fk_armazenamento = a.id
-                AND (
-                    nivel_carbono < 20
-                    OR nivel_carbono > 40
-                )
+                AND (nivel_carbono < 20 OR nivel_carbono > 40)
+                AND DATE(data_registro) = CURDATE()
             ) AS alertas,
             (
                 SELECT data_registro FROM vw_dashboard
                 WHERE fk_armazenamento = a.id
                 AND (nivel_carbono < 20 OR nivel_carbono > 40)
+                AND DATE(data_registro) = CURDATE()
                 ORDER BY data_registro DESC
                 LIMIT 1
             ) AS ultimo_alerta
