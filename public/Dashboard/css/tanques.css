@@ -325,7 +325,7 @@ span {
     align-self: center;
     padding: 3px;
     overflow-y: auto;
-
+    margin-bottom: 40px;
 }
 
 #pergunta{
