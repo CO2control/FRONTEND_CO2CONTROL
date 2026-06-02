@@ -22,15 +22,17 @@
 
             <div class="menu">
                 <a href="dashboard.html">
-                    <div class="item"><img src="./assets/iconNav.png" alt="">
+                    <div class="item">
+                        <img src="./assets/iconNav.png" alt="">
                         <p>Dashboard</p>
                     </div>
                 </a>
-
-
-                
-                
-                <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
+                <a href="alertas.html">
+                    <div class="item">
+                        <img src="./assets/alerta.png" alt="">
+                        <p>Alertas</p>
+                    </div>
+                </a>
                 <a href="../index.html">
                     <div class="item">
                         <img src="./assets/porta.png" alt="">
@@ -97,13 +99,17 @@
 
                 <!-- ALERTAS -->
              <div class="alerts">
-    <div class="titulo">ALERTAS</div>
+    <div class="titulo">ALERTAS - <span id="data"></span></div>
 
     <div id="alertaX"></div>
 </div>
         </div>
     </div>
     <script>
+
+        let data = new Date();
+        document.getElementById("data").innerHTML = data.toLocaleDateString("pt-BR");
+
 
         let listaTanques = [];
 
@@ -222,7 +228,6 @@
     kpiVariacao();
     mostrarAlerta();
     kpiTanqueAlerta();
-    mostrarCards();
 
         setInterval(() => {
             kpiSensor();
@@ -230,7 +235,6 @@
             kpiVariacao();
             mostrarAlerta();
             kpiTanqueAlerta();
-            mostrarCards();
         }, 1000);
 
     function abrirTanque(idArmazenamento){
