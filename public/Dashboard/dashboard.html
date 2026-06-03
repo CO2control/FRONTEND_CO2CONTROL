@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <!-- SIDEBAR -->
+        <!-- sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <img src="./assets/logo.png" alt="Logo">
@@ -47,7 +47,7 @@
         </div>
 
         <div class="main">
-            <!-- KPIs -->
+            <!-- kpis -->
             <div class="kpis">
                 <div class="kpi kpi-verde">
                     <div class="kpi-title"><span>Sensores Ativos</span></div>
@@ -76,18 +76,18 @@
             <div class="content">
                 <div id="lista">
                     <div class="lista-header">
-                        <div class="titulo-wrapper">
+                        <div class="titulo-x">
                             <img class="tempoReal" src="simboloVerde.png" alt="">
                             <h2 id="head_lista">Todos os tanques</h2>
                             <a href="cadastro-tanque.html"><button class="button3">CADASTRAR TANQUE</button></a>
                         </div>
                         
-                        <div class="controles-wrapper">
+                        <div class="controles-x">
                             <input type="text" id="ipt_pesq" placeholder="Digite o nome do seu tanque">
                             <button class="button1" onclick="pesquisarNome()">PESQUISAR</button>
                             <select id="ipt_filtro" class="button2" onchange="filtrarTanques()"> 
                                 <!-- onchange chama a função automaticamente -->
-                                <option value="x">FILTRAR</option>
+                                <option value="" disabled selected hidden>FILTRAR</option>
                                 <option value="3">Bom</option>
                                 <option value="4">Abaixo</option>
                                 <option value="5">Alto</option>
@@ -97,6 +97,7 @@
                         </div>
                     </div>
                     <div id="div_cards" class="tanques_lista">
+                        <div id="msg"></div>
                     </div>
 
                 </div>
@@ -222,9 +223,7 @@
                 console.error('Nenhum dado encontrado ou erro na API');
             }
         })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+
     
 
     }
@@ -234,6 +233,7 @@
     kpiVariacao();
     mostrarAlerta();
     kpiTanqueAlerta();
+    renderizarCards()
 
         setInterval(() => {
             kpiSensor();
@@ -241,6 +241,7 @@
             kpiVariacao();
             mostrarAlerta();
             kpiTanqueAlerta();
+            renderizarCards();
         }, 1000);
 
     function abrirTanque(idArmazenamento){
@@ -254,27 +255,27 @@
 
     for(let i = 0; i < dados.length; i++) {
        let estilo;
+        let corNivel;
 
-
-
-let corNivel;
-
-if (dados[i].nivel < 20) {
-    estilo = "etiqueta_amarelo";
-    corNivel = "#fbc02d";
-} 
-else if (dados[i].nivel <= 40) {
-    estilo = "etiqueta_verde";
-    corNivel = "#2e7d32";
-} 
-else if (dados[i].nivel <= 60) {
-    estilo = "etiqueta_laranja";
-    corNivel = "#f57c00";
-} 
-else {
-    estilo = "etiqueta_vermelho";
-    corNivel = "#c62828";
-}
+        if (dados[i].nivel >= 5 && dados[i].nivel < 20) {
+            estilo = "etiqueta_amarelo";
+            corNivel = "#fbc02d";
+        } 
+        else if (dados[i].nivel >= 20 && dados[i].nivel <= 40) {
+            estilo = "etiqueta_verde";
+            corNivel = "#2e7d32";
+        } 
+        else if (dados[i].nivel > 40 && dados[i].nivel <=55) {
+            estilo = "etiqueta_laranja";
+            corNivel = "#f57c00";
+        } else if (dados[i].nivel < 5) {
+            estilo = "etiqueta_vermelho";
+            corNivel = "#c62828";
+        }
+        else {
+            estilo = "etiqueta_vermelho";
+            corNivel = "#c62828";
+        }
 
 if(dados[i].nivel >= 0){
     div_cards.innerHTML += `
@@ -328,28 +329,26 @@ function pesquisarNome() {
 
     for (let i = 0; i < listaTanques.length; i++) {
 
-        if (filtro == "x") {
+        if (filtro == "4" && listaTanques[i].nivel > 5 &&  listaTanques[i].nivel < 20) {
             resultado.push(listaTanques[i]);
         }
 
-        else if (filtro == "4" && listaTanques[i].nivel < 20) {
+        else if (filtro == "3" && listaTanques[i].nivel >= 20 && listaTanques[i].nivel <= 40) {
             resultado.push(listaTanques[i]);
         }
 
-        else if (filtro == "3" && listaTanques[i].nivel>= 20 && listaTanques[i].nivel<= 40) {
+        else if (filtro == "5" && listaTanques[i].nivel > 40 && listaTanques[i].nivel <= 55) {
             resultado.push(listaTanques[i]);
         }
 
-        else if (filtro == "5" && listaTanques[i].nivel> 40 && listaTanques[i].nivel<= 60) {
+        else if (filtro == "6" && listaTanques[i].nivel < 5 || listaTanques[i].nivel > 55) {
             resultado.push(listaTanques[i]);
-        }
-
-        else if (filtro == "6" && listaTanques[i].nivel> 60) {
-            resultado.push(listaTanques[i]);
-        }
+        } 
     }
 
     renderizarCards(resultado);
+
+    
 }
     </script>
 

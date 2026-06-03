@@ -10,14 +10,14 @@ body {
     background-color: #f2f2f2;
 }
 
-/* CONTAINER */
+/* sidebar */
 .container {
     display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
-/* SIDEBAR */
+/* sidebar */
 .sidebar {
     width: 220px;
     background-color: #5a0a0a;
@@ -85,9 +85,6 @@ body {
     background-color: rgba(143, 8, 8, 0.5);
 }
 
-
-
-/* MAIN */
 .main {
     flex: 1;
     padding: 20px;
@@ -97,7 +94,7 @@ body {
     overflow: hidden;
 }
 
-/* KPIs */
+/* kpis */
 .kpis {
     display: flex;
     justify-content: space-between;
@@ -150,7 +147,6 @@ body {
     font-weight: bold;
 }
 
-/* CONTENT */
 .content {
     display: flex;
     flex: 1;
@@ -158,7 +154,7 @@ body {
     min-height: 0;
 }
 
-/* ALERTS */
+/* alertas */
 .alerts {
     flex: 1;
     padding: 20px;
@@ -201,7 +197,6 @@ body {
     font-weight: bold;
 }
 
-/* LISTA PRINCIPAL */
 #lista {
     display: flex;
     flex-direction: column;
@@ -223,13 +218,13 @@ body {
     align-items: center;
 }
 
-.titulo-wrapper {
+.titulo-x {
     display: flex;
     align-items: center;
     gap: 140px;
 }
 
-.titulo-wrapper h2 {
+.titulo-x h2 {
     margin-top: 15px;
     margin-left: 30px;
     font-size: 35px;
@@ -241,14 +236,6 @@ body {
     width: 70px;
 }
 
-.controles-wrapper {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
 
 input {
     border-radius: 5px;
@@ -310,6 +297,7 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    cursor: pointer;
 }
 
 .elemento_lista:hover {
