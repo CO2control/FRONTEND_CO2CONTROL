@@ -29,17 +29,37 @@ body {
 .logo {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 90px;
+    margin-top: 20px;
 }
 
 .logo img {
-    width: 70%;
+    width: 100%;
 }
 
 .menu {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.bem-vindo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  margin-top: 90px;
+  margin-bottom: 165px;
+  color: #ffffff;
+}
+
+.bem-vindo h3 {
+  font-weight: 300;
+}
+
+.bem-vindo h3 span {
+  font-weight: 800;
 }
 
 .item {
@@ -53,13 +73,19 @@ body {
 }
 
 .item:hover {
-    background-color: rgba(17, 17, 17, 0.1);
+    background-color: rgba(143, 8, 8, 0.5);
 }
 
 .item > img {
     width: 30px;
     margin-right: 10px;
 }
+
+.sair {
+    background-color: rgba(143, 8, 8, 0.5);
+}
+
+
 
 /* MAIN */
 .main {

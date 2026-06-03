@@ -22,6 +22,11 @@
                 <img src="./assets/logo.png" alt="Logo">
             </div>
 
+            <div class="bem-vindo">
+                <h3>Seja bem vindo(a), <span id="nome_usuario"></span>!</h3>
+            </div>
+
+
             <div class="menu">
                 <a href="dashboard.html">
                     <div class="item"><img src="./assets/iconNav.png" alt="">
@@ -30,9 +35,9 @@
                 </a>
                 
                 <div class="item"><img src="./assets/alerta.png" alt=""><span>Alertas</span></div>
-                
+
                 <a href="../index.html">
-                    <div class="item">
+                    <div class="item sair">
                         <img src="./assets/porta.png" alt="">
                         <p>Sair</p>
                     </div>
@@ -61,6 +66,8 @@
 </body>
 </html>
 <script>
+    nome_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
     function exibirAlertas(filter_param) {
         fetch(`/alertas/buscarAlertasPorIdEmpresa/${sessionStorage.ID_EMPRESA}/${filter_param}`, {
             method: "GET",
