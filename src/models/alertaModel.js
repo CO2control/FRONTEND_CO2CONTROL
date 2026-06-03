@@ -20,9 +20,9 @@ function buscarAlertasPorIdEmpresa(id_empresa, filter_param) {
     if (filter_param == 0) {
         instrucaoSql += ";";
     } else if (filter_param == 1) {
-        instrucaoSql += " ORDER BY ls.nivel_carbono DESC";
+        instrucaoSql += " ORDER BY ls.nivel_carbono DESC;";
     } else if(filter_param == 2) {
-        instrucaoSql += " ORDER BY ar.local_tanque ASC";
+        instrucaoSql += " ORDER BY ar.local_tanque ASC;";
     }
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
