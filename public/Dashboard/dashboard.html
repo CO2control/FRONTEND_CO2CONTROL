@@ -188,7 +188,6 @@
                         alertaX.innerHTML +=`<a href="alertas.html">
                             <div class="alert">
                         <span class="xxx">${dados[i].tanque}</span> - 
-                        <span>${dados[i].mensagem}</span> - 
                         <span>${dados[i].nivel}</span> - 
                         <span>${dados[i].data_alerta}</span>
                     </div>
@@ -233,7 +232,7 @@
     kpiVariacao();
     mostrarAlerta();
     kpiTanqueAlerta();
-    renderizarCards()
+    mostrarCards()
 
         setInterval(() => {
             kpiSensor();
@@ -241,8 +240,13 @@
             kpiVariacao();
             mostrarAlerta();
             kpiTanqueAlerta();
-            renderizarCards();
         }, 1000);
+
+        setInterval(() => {
+            mostrarCards()
+        },10000)
+
+     
 
     function abrirTanque(idArmazenamento){
 
